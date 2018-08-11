@@ -1,3 +1,4 @@
+gmt
 jinja2
 ipython
 sphinx

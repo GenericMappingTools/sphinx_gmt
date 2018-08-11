@@ -1,0 +1,94 @@
+language: generic
+
+sudo: false
+
+branches:
+    only:
+        - master
+        # Regex to build tagged commits with version numbers
+        - /\d+\.\d+(\.\d+)?(\S*)?$/
+
+env:
+    global:
+        # Github Token for pushing the built docs (GH_TOKEN)
+        - secure: "jS8+ZMM/LrAhBMTT3eE3UgBdkVfAdnnFN6mLGUHNfFWXzENysfFNnQHz/VYHwg0RR8Z2Dj2c8J1G+FQGBvNVL4L1VxbwKEEUtmVOv4cgXgIJwX9TIc+odfzfwnE0H1bhkmgtLcA2WscMRL3F3yPN5XMov70PyhjPCg5SGwDd+GZoo+fH1IX/kdH3cQhMuyNFWglPtjIL88fYueYciWJcqpkzaTAzxyPWBgy3gppummM6EsnBEUEQWwoYjxLu6ggK7QxeePe4D07pk+VPf25yHMQprFu59+AeX0g61mok+oPnalvQyn/t2cbErVxc0oQUoDqIh3Jbii+NQe42thKHB98ZXVj3BVknYfP06sKBEnTysb4OH6R7NnAPlXVKiDl1/AA2HdNJ7T/cwlLsXN0t7CyWucFVhLHXAYKS3cP8if/0kZ85s7hu3MG+cW9yhRRYCBGvHpAlLCvyWXinGcvWK/Oz9EEkrZ1TpCan/LJ+Vu3Nc9/LFbTstS/d4Nw8ziFko7Kqfki0hGT+mPPuzwYJRCWoIqbSPqyeW+DIO1As0CQa4mIu4sjeaK/aETT0WoN5aHhCYBkSyTn2fKuWbcUTJjNQys9NXn1oA4AC3E0XtkfM+U5u/quUSZph9X7erHCEvKpYOwQbeGWjzc95Mf64c8uJLlYMrp64gukc4F2hXG8="
+        # TWINE_PASSWORD to deploy to PyPI
+        - secure: "YzophiGjwkRl0ijCtahFGfU1aNtTpCIg9WCP+v6zGT5T1YSTEWeAH0Br3DZZTvtAWW6LWrpVuEhmq4vHQALcNXb9mz2sa6RVfatR/LX4/orUaRfeTHNkbxnsRXqhRORB6WDBVvGUEC+l3hxT67JOK+Jx3BJvs3jFg//UMNsjnNPM+73iQETZ5/Fj0NL7H/G7iHAc8ngJd10yaqnd5tSCLGSejf8pFoS5W9dnYXbmRkTGo3pTQbrZA4pPwRm26ewkbVcMy1SMLCOJbNtirRmDF4BwnxBgB5ZVxO+/WiNow+yg1LRF1fTLwgWzZ6XGUaRDUJqNK5i3Mg9Bk4EJqmPytZGJL0DJ6CXgR1LKKiMytKKx97PNW3D8o/q1zShtRW5HwmSQ7vTNUPw1ak+wtZGACa+fPzGCi5AyzAN6wASR8uQSgCGARHGWmpuSjjUua7N7XN8HaXlnj2Ko435bfcIH83AXyCb72kChpYq/AHt75iuEbFq4nT4fQY6jiA17BQqYGXm9PxWdI6YilbFSz6ZuAC0aiCcmx7lkz8NZeMkUMVnyhnOa+mudMep7mnLppfaebiFW68G467pNPR1pgG/eXYhTCbEhgu952iC8koWKdv3/Bb1bPRzuMQTGzPbE3VLCnA6LH6bqrFb63HNdhSzsqAm5s4VQ7b6KBHrAz1GfSI4="
+        - TWINE_USERNAME=Leonardo.Uieda
+        - CHECK=false
+        - BUILD_DOCS=false
+        - DEPLOY_DOCS=false
+        - DEPLOY_PYPI=false
+        - CONDA_REQUIREMENTS="requirements.txt"
+
+matrix:
+    # Build under the following configurations
+    include:
+        - os: linux
+          env:
+              - PYTHON=3.5
+              - BUILD_DOCS=true
+        - os: linux
+          env:
+              - PYTHON=3.6
+              - CHECK=true
+              - BUILD_DOCS=true
+              - DEPLOY_DOCS=true
+              - DEPLOY_PYPI=true
+        - os: osx
+          env:
+              - PYTHON=3.5
+              - BUILD_DOCS=true
+        - os: osx
+          env:
+              - PYTHON=3.6
+              - BUILD_DOCS=true
+
+before_install:
+    # Get the Fatiando CI scripts
+    - git clone https://github.com/fatiando/continuous-integration.git
+    # Download and install miniconda and setup dependencies
+    # Need to source the script to set the PATH variable globaly
+    - source continuous-integration/travis/setup-miniconda.sh
+    # Show installed pkg information for postmortem diagnostic
+    - conda list
+
+install:
+    # Package and install
+    - python setup.py bdist_wheel
+    - pip install dist/*
+
+script:
+    # Check code for style and lint for code quality
+    - if [ "$CHECK" == "true" ]; then
+        make check;
+      fi
+    # Build the documentation
+    - if [ "$BUILD_DOCS" == "true" ]; then
+        make -C doc all;
+      fi
+
+deploy:
+    # Make a release on PyPI
+    - provider: script
+      script: continuous-integration/travis/deploy-pypi.sh
+      on:
+          tags: true
+          condition: '$DEPLOY_PYPI == "true"'
+    # Push the built HTML in doc/_build/html to the gh-pages branch
+    - provider: script
+      script: continuous-integration/travis/deploy-gh-pages.sh
+      skip_cleanup: true
+      on:
+          branch: master
+          condition: '$DEPLOY_DOCS == "true"'
+    # Push HTML when building tags as well
+    - provider: script
+      script: continuous-integration/travis/deploy-gh-pages.sh
+      skip_cleanup: true
+      on:
+          tags: true
+          condition: '$DEPLOY_DOCS == "true"'
+
+notifications:
+    email: false
