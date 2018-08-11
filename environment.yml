@@ -1,0 +1,14 @@
+name: gmtsphinxext
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - python=3.6
+    - pip
+    - jinja2
+    - ipython
+    - sphinx
+    - sphinx_rtd_theme
+    - numpydoc
+    - black
+    - twine
