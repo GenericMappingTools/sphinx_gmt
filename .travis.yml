@@ -61,6 +61,7 @@ install:
 script:
     # Check code for style and lint for code quality
     - if [ "$CHECK" == "true" ]; then
+        pip install black;
         make check;
       fi
     # Build the documentation

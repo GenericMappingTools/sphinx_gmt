@@ -1,7 +1,8 @@
-gmt
 jinja2
 ipython
 sphinx
+# Development requirements
+gmt=5.*
 sphinx_rtd_theme
 numpydoc
 twine
