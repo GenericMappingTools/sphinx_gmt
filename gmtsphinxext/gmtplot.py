@@ -1,28 +1,6 @@
 # pylint: disable=exec-used
 """
-Sphinx extension for including live rendered GMT plots within sphinx documentation. For
-example::
-
-    .. gmt-plot::
-
-        import gmt
-        fig = gmt.Figure()
-        fig.coast(region="g", projection="W0/10i", land="gray")
-        fig.show()
-
-The *last statement* of the code-block should contain a call to ``gmt.Figure.show``.
-Anything printed to stdout will be captured and included between the figure and the
-code.
-
-The directive has the following options::
-
-    .. gmt-plot::
-        :width: size   # Set the width of the image (should contain a unit, like 400px)
-        :center:       # If set, will center the output image
-        :hide-code:    # If set, then hide the code and only show the plot
-        :alt: text     # Alternate text when plot cannot be rendered
-        :namespace:    # Specify a plotting namespace that is persistent within the page
-
+Sphinx extension for including live rendered GMT plots within sphinx documentation.
 """
 import io
 import os
@@ -31,6 +9,8 @@ import ast
 import warnings
 import contextlib
 import base64
+import tempfile
+import subprocess
 
 import jinja2
 
@@ -86,6 +66,8 @@ class GMTPlotDirective(Directive):
     has_content = True
 
     option_spec = {
+        "language": unchanged,
+        "figure": unchanged,
         "hide-code": flag,
         "namespace": unchanged,
         "alt": unchanged,
@@ -128,6 +110,8 @@ class GMTPlotDirective(Directive):
         plot_node["relpath"] = os.path.relpath(rst_dir, env.srcdir)
         plot_node["rst_source"] = rst_source
         plot_node["rst_lineno"] = self.lineno
+        plot_node["language"] = self.options.get("language", "bash")
+        plot_node["figure"] = self.options.get("figure", "")
         plot_node["width"] = self.options.get("width", "")
         plot_node["center"] = "center" in self.options
         if "alt" in self.options:
@@ -136,7 +120,7 @@ class GMTPlotDirective(Directive):
         result = [nodes.target("", "", ids=[target_id])]
         if "hide-code" not in self.options:
             source_literal = nodes.literal_block(code, code)
-            source_literal["language"] = "python"
+            source_literal["language"] = plot_node["language"]
             result.append(source_literal)
         result.append(plot_node)
         return result
@@ -162,9 +146,9 @@ class _CatchDisplay:  # pylint: disable=too-few-public-methods
         self.output = output
 
 
-def eval_block(code, namespace=None, filename="<string>"):
+def eval_python(code, namespace=None, filename="<string>"):
     """
-    Execute a multi-line block of code in the given namespace.
+    Execute a multi-line block of Python code in the given namespace.
 
     If the final statement in the code is an expression, return the result of the
     expression.
@@ -189,6 +173,33 @@ def eval_block(code, namespace=None, filename="<string>"):
     return catch_display.output
 
 
+def eval_bash(code, figure):
+    """
+    Execute a multi-line block of bash code and load the specified image file.
+    """
+    with tempfile.TemporaryDirectory() as tmpdir:
+        script = os.path.join(tmpdir, "script.sh")
+        with open(script, "w") as fout:
+            fout.write(code)
+        proc = subprocess.run(
+            "bash {}".format(script),
+            shell=True,
+            cwd=tmpdir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(
+                "GMT bash failed:\nSTDOUT: {}\nSTDERR: {}".format(
+                    proc.stdout.decode("utf-8"), proc.stderr.decode("utf-8")
+                )
+            )
+        figure = os.path.join(tmpdir, figure)
+        with open(figure, "rb") as fin:
+            image = fin.read()
+    return image
+
+
 def html_visit_gmt_plot(self, node):
     """
     Execute the code and produce output for HTML.
@@ -198,7 +209,12 @@ def html_visit_gmt_plot(self, node):
     try:
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
-            returned = eval_block(node["code"], namespace)
+            if node["language"] == "python":
+                returned = eval_python(node["code"], namespace)
+            if node["language"] == "bash":
+                returned = eval_bash(node["code"], node["figure"])
+            else:
+                raise ValueError("Invalid language '{}'".format(node["language"]))
         stdout = output.getvalue()
     except Exception as e:
         warnings.warn(
@@ -215,6 +231,9 @@ def html_visit_gmt_plot(self, node):
             image = base64.encodebytes(returned.data).decode("utf-8")
         elif isinstance(returned, HTML):
             html = returned.data
+        else:
+            # Assume it's a PNG loaded as bytes
+            image = base64.encodebytes(returned).decode("utf-8")
         self.body.append(
             HTML_TEMPLATE.render(
                 div_id=node["div_id"],
