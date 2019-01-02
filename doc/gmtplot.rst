@@ -16,7 +16,7 @@ The following RST code:
 .. code-block:: bash
 
     .. gmt-plot::
-        :figure: example_02.png
+        :language: bash
 
         ps=example_02.ps
         gmt set FONT_TITLE 30p MAP_ANNOT_OBLIQUE 0
@@ -37,7 +37,7 @@ The following RST code:
 is executed by sphinx and turned into:
 
 .. gmt-plot::
-    :figure: example_02.png
+    :language: bash
 
     ps=example_02.ps
     gmt set FONT_TITLE 30p MAP_ANNOT_OBLIQUE 0
