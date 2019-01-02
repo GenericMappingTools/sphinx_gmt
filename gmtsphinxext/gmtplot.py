@@ -74,6 +74,8 @@ TEMPLATE = """
     {% for option in code_opts -%}
     {{ option }}
     {% endfor %}
+{%- else %}
+:download:`Source Code <{{ code }}>`
 {%- endif %}
 
 .. figure:: {{ image }}
