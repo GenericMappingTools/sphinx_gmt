@@ -346,12 +346,12 @@ class GMTPlotDirective(Directive):
 
             # Get absolute path of the script
             if config.gmtplot_basedir:  # relative to gmtplot_basedir
-                code_basedir = Path(env.app.srcdir, config.gmtplot_basedir)
+                code_file = Path(env.app.srcdir, config.gmtplot_basedir, self.arguments[0])
             elif Path(self.arguments[0]).is_absolute():  # relative to source directory
-                code_basedir = Path(env.app.srcdir)
+                code_file = Path(env.app.srcdir, self.arguments[0][1:])
             else:  # relative to current rst file's path
-                code_basedir = Path(cwd)
-            code_file = Path(code_basedir, self.arguments[0]).absolute()
+                code_file = Path(cwd, self.arguments[0])
+            code_file = code_file.absolute()
             code_basedir = code_file.parent
             code = code_file.read_text(encoding="utf-8")
 
