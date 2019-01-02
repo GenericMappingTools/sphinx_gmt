@@ -1,129 +1,187 @@
-# pylint: disable=exec-used
 """
-Sphinx extension for including live rendered GMT plots within sphinx documentation.
+A directive for including a GMT plot in a Sphinx document.
+
+The source code for the GMT plot may be included in one of two ways:
+
+1.  **A path to a source file** as the argument to the directive::
+
+        .. gmt-plot:: path/to/plot.sh
+
+            Optional caption for the plot
+
+2.  Included as **inline content** to the directive::
+
+        .. gmt-plot::
+            :language: bash
+
+            gmt begin map pdf
+            gmt basemap -JX10c/10c -R0/10/0/10 -Baf
+            gmt end
+
+    In this case, the `language` option needs to be specified if the
+    language is different from `highlight_language` variable in conf.py.
+
+Options
+-------
+
+The ``gmt-plot`` directive supports the following options:
+
+    show-code : bool
+        Whether to display the source code. The default can be changed
+        using the `gmtplot_show_code` variable in conf.py.
+
+    language : {'python', 'bash'}
+        Specify the language of the source code. The default can be changed
+        using the `highlight_language` variable in conf.py.
+
+    caption : str
+        Caption of the rendered figure.
+
+Additionally, this directive supports options of the `figure` and
+`literalinclude` directives.
+
+Configuration options
+---------------------
+
+The plot directive has the following configuration options:
+
+    gmtplot_show_code
+        Default value for the show-code option.
+
+    gmtplot_basedir
+        Base directory, to which ``gmt-plot`` file names are relative to.
+        If None or empty, file names are relative to the directory where
+        the file containing the directive is. However, if it is absolute
+        (starting with /), it is relative to the top source directory.
+
 """
-import io
+
 import os
 import sys
 import ast
-import warnings
-import contextlib
-import base64
 import tempfile
 import subprocess
+import textwrap
+from pathlib import Path
 
+from docutils.parsers.rst import Directive, directives
 import jinja2
 
-from IPython.display import Image, HTML
 
-from docutils import nodes
-from docutils.parsers.rst import Directive
-from docutils.parsers.rst.directives import flag, unchanged
+TEMPLATE = """
+{%- if show_code -%}
+.. literalinclude:: {{ code }}
+    {% for option in code_opts -%}
+    {{ option }}
+    {% endfor %}
+{%- endif %}
 
-from sphinx.locale import _
+.. figure:: {{ image }}
+    {% for option in image_opts -%}
+    {{ option }}
+    {% endfor %}
 
+    {{ caption }}
 
-HTML_TEMPLATE = jinja2.Template(
-    """
-<div class="gmtplot-output" id="{{ div_id }}">
-    {% if stdout %}
-        <div class="highlight">
-            <pre>{{ stdout }}</pre>
-        </div>
-    {% endif %}
-    {% if image or html %}
-        {% set center_style="display: block; margin-left: auto; margin-right: auto;" %}
-        <div class="gmtplot-output-figure">
-            {% if image %}
-                <img src="data:image/png;base64,{{ image }}"
-                     style="{% if width %}width: {{ width }};{% endif %}
-                            {% if center %}{{ center_style }}{% endif %}">
-            {% endif %}
-            {% if html %}
-                {{ html }}
-            {% endif %}
-        </div>
-    {% endif %}
-</div>
 """
-)
 
 
-class GMTPlotNode(nodes.General, nodes.Element):
+def _option_language(arg):
+    """Check language option."""
+    return directives.choice(arg, ("bash", "python"))
+
+
+def _option_boolean(arg):
+    """Check boolean options."""
+    if not arg or not arg.strip():  # no argument given, assume used as a flag
+        return True
+    elif arg.strip().lower() in ("no", "0", "false"):
+        return False
+    elif arg.strip().lower() in ("yes", "1", "true"):
+        return True
+    else:
+        raise ValueError('"{}" unknown boolean'.format(arg))
+
+
+def _option_align(arg):
+    """Check align option."""
+    return directives.choice(
+        arg, ("top", "middle", "bottom", "left", "center", "right")
+    )
+
+
+def _set_gmt_datadir(cwd):
+    """Set evirionment variable GMT_DATADIR so that script can access
+    its data files.
     """
-    Sphinx node for a GMT plot.
+    if "GMT_DATADIR" not in os.environ:
+        os.environ["GMT_DATADIR"] = str(cwd)
+    else:
+        sep = ";" if sys.platform == "win32" else ":"
+        os.environ["GMT_DATADIR"] = str(cwd) + sep + os.environ["GMT_DATADIR"]
+
+
+def _search_images(cwd):
     """
-
-    pass
-
-
-class GMTPlotDirective(Directive):
+    Search images in PNG and PDF format in a specified directory.
+    If .png and .pdf files are not found and .ps file is found, then
+    convert .ps file to PNG and PDF format.
     """
-    The gmt-plot directive implementation. This is what defines what the directive does
-    and how to build the rst document tree from the directive content.
+    cwd = Path(cwd)
+    png_images = list(cwd.glob("*.png"))
+
+    if len(png_images) > 1:
+        raise ValueError("More than one figure generated in one GMT plot.")
+    elif len(png_images) == 1:
+        pdf_images = list(cwd.glob("*.pdf"))
+        if len(pdf_images) == 1:
+            return [png_images[0], pdf_images[0]]
+        else:
+            return [png_images[0]]
+    else:  # no PNG found
+        ps_images = list(cwd.glob("*.ps"))
+        if len(ps_images) > 1:
+            raise ValueError("More than one figure generated in one GMT plot.")
+        elif len(ps_images) == 1:  # PS found
+            cmd = "gmt psconvert -A -P -T{} {}"
+            subprocess.run(cmd.format("g", ps_images[0]), shell=True)
+            subprocess.run(cmd.format("f", ps_images[0]), shell=True)
+            png_images = list(cwd.glob("*.png"))
+            pdf_images = list(cwd.glob("*.pdf"))
+
+            if len(png_images) == 1 and len(pdf_images) == 1:
+                return [png_images[0], pdf_images[0]]
+            else:
+                return []
+        else:  # No PNG and PS found
+            return []
+
+
+def eval_bash(code, code_dir, output_dir, output_base):
     """
+    Execute a multi-line block of bash code and copy the generated image files
+    to specified output directory.
+    """
+    with tempfile.TemporaryDirectory() as tmpdir:
+        Path(tmpdir, "script.sh").write_text(code, encoding="utf-8")
 
-    has_content = True
-
-    option_spec = {
-        "language": unchanged,
-        "figure": unchanged,
-        "hide-code": flag,
-        "namespace": unchanged,
-        "alt": unchanged,
-        "width": unchanged,
-        "center": flag,
-    }
-
-    def run(self):
-        """
-        Build the rst document node from the directive content.
-        """
-        env = self.state.document.settings.env
-
-        if not hasattr(env, "gmt_namespaces"):
-            env.gmt_namespaces = {}
-        namespace = env.gmt_namespaces.setdefault(env.docname, {}).setdefault(
-            self.options.get("namespace", "default"), {}
+        _set_gmt_datadir(code_dir)
+        proc = subprocess.run(
+            "bash {}".format(Path(tmpdir, "script.sh")),
+            shell=True,
+            cwd=tmpdir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
-
-        code = "\n".join(self.content)
-
-        # Get the name of the source file we are currently processing
-        rst_source = self.state_machine.document["source"]
-        rst_dir = os.path.dirname(rst_source)
-        rst_filename = os.path.basename(rst_source)
-
-        # Use the source file name to construct a friendly target_id
-        rst_base = rst_filename.replace(".", "-")
-        serialno = env.new_serialno("gmt-plot")
-        div_id = "{0}-gmt-plot-{1}".format(rst_base, serialno)
-        target_id = "{0}-gmt-source-{1}".format(rst_base, serialno)
-
-        # Create the node in which the plot will appear. This will be processed by
-        # html_visit_gmt_plot
-        plot_node = GMTPlotNode()
-        plot_node["target_id"] = target_id
-        plot_node["div_id"] = div_id
-        plot_node["code"] = code
-        plot_node["namespace"] = namespace
-        plot_node["relpath"] = os.path.relpath(rst_dir, env.srcdir)
-        plot_node["rst_source"] = rst_source
-        plot_node["rst_lineno"] = self.lineno
-        plot_node["language"] = self.options.get("language", "bash")
-        plot_node["figure"] = self.options.get("figure", "")
-        plot_node["width"] = self.options.get("width", "")
-        plot_node["center"] = "center" in self.options
-        if "alt" in self.options:
-            plot_node["alt"] = self.options["alt"]
-
-        result = [nodes.target("", "", ids=[target_id])]
-        if "hide-code" not in self.options:
-            source_literal = nodes.literal_block(code, code)
-            source_literal["language"] = plot_node["language"]
-            result.append(source_literal)
-        result.append(plot_node)
-        return result
+        if proc.returncode != 0:
+            raise RuntimeError(
+                "GMT bash failed:\nSTDOUT: {}\nSTDERR: {}".format(
+                    proc.stdout.decode("utf-8"), proc.stderr.decode("utf-8")
+                )
+            )
+        for image in _search_images(tmpdir):
+            image.rename(Path(output_dir, output_base).with_suffix(image.suffix))
+        return output_base + ".*"
 
 
 class _CatchDisplay:  # pylint: disable=too-few-public-methods
@@ -146,148 +204,241 @@ class _CatchDisplay:  # pylint: disable=too-few-public-methods
         self.output = output
 
 
-def eval_python(code, namespace=None, filename="<string>"):
+def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
     """
-    Execute a multi-line block of Python code in the given namespace.
-
-    If the final statement in the code is an expression, return the result of the
-    expression.
+    Execute a multi-line block of Python code and copy the generated image files
+    to specified output directory.
     """
     tree = ast.parse(code, filename="<ast>", mode="exec")
-    if namespace is None:
-        namespace = {}
-    if isinstance(tree.body[-1], ast.Expr):
+    if (
+        isinstance(tree.body[-1], ast.Expr) and tree.body[-1].value.func.attr == "show"
+    ):  # last statment is `fig.show()` in gmt-python
         to_exec, to_eval = tree.body[:-1], tree.body[-1:]
     else:
         to_exec, to_eval = tree.body, []
-    for node in to_exec:
-        compiled = compile(ast.Module([node]), filename=filename, mode="exec")
-        exec(compiled, namespace)
-    catch_display = _CatchDisplay()
-    with catch_display:
-        for node in to_eval:
-            compiled = compile(
-                ast.Interactive([node]), filename=filename, mode="single"
-            )
-            exec(compiled, namespace)
-    return catch_display.output
 
-
-def eval_bash(code, figure):
-    """
-    Execute a multi-line block of bash code and load the specified image file.
-    """
+    cwd = os.getcwd()
     with tempfile.TemporaryDirectory() as tmpdir:
-        script = os.path.join(tmpdir, "script.sh")
-        with open(script, "w") as fout:
-            fout.write(code)
-        proc = subprocess.run(
-            "bash {}".format(script),
-            shell=True,
-            cwd=tmpdir,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        if proc.returncode != 0:
-            raise RuntimeError(
-                "GMT bash failed:\nSTDOUT: {}\nSTDERR: {}".format(
-                    proc.stdout.decode("utf-8"), proc.stderr.decode("utf-8")
-                )
-            )
-        figure = os.path.join(tmpdir, figure)
-        with open(figure, "rb") as fin:
-            image = fin.read()
-    return image
+        os.chdir(tmpdir)
+        _set_gmt_datadir(code_dir)
 
+        for node in to_exec:
+            compiled = compile(ast.Module([node]), filename=filename, mode="exec")
+            exec(compiled)
 
-def html_visit_gmt_plot(self, node):
-    """
-    Execute the code and produce output for HTML.
-    """
-    # Execute the code, saving output and namespace
-    namespace = node["namespace"]
-    try:
-        output = io.StringIO()
-        with contextlib.redirect_stdout(output):
-            if node["language"] == "python":
-                returned = eval_python(node["code"], namespace)
-            if node["language"] == "bash":
-                returned = eval_bash(node["code"], node["figure"])
-            else:
-                raise ValueError("Invalid language '{}'".format(node["language"]))
-        stdout = output.getvalue()
-    except Exception as e:
-        warnings.warn(
-            "gmt-plot: {0}:{1} Code execution failed with: {2}: {3}".format(
-                node["rst_source"], node["rst_lineno"], e.__class__.__name__, str(e)
-            )
-        )
-        raise e
-
-    if stdout or returned is not None:
-        image = ""
-        html = ""
-        if isinstance(returned, Image):
-            image = base64.encodebytes(returned.data).decode("utf-8")
-        elif isinstance(returned, HTML):
-            html = returned.data
+        images = _search_images(tmpdir)
+        if images:
+            for image in images:
+                image.rename(Path(output_dir, output_base).with_suffix(image.suffix))
         else:
-            # Assume it's a PNG loaded as bytes
-            image = base64.encodebytes(returned).decode("utf-8")
-        self.body.append(
-            HTML_TEMPLATE.render(
-                div_id=node["div_id"],
-                stdout=stdout,
-                html=html,
-                image=image,
-                width=node["width"],
-                center=node["center"],
+            catch_display = _CatchDisplay()
+            with catch_display:
+                for node in to_eval:
+                    compiled = compile(
+                        ast.Interactive([node]), filename=filename, mode="single"
+                    )
+                    exec(compiled)
+            Path(output_dir, output_base).with_suffix(".png").write_bytes(
+                catch_display.output.data
             )
+    os.chdir(cwd)
+    return output_base + ".*"
+
+
+def render_figure(code, code_dir, language, output_dir, output_base):
+    """
+    Run a GMT code and save the images in *output_dir* with file names
+    derived from *output_base*.
+    """
+    if language == "bash":
+        figname = eval_bash(code, code_dir, output_dir, output_base)
+    elif language == "python":
+        figname = eval_python(code, code_dir, output_dir, output_base)
+    return figname
+
+
+def guess_language(filename):
+    """Guess language from suffix of the script."""
+    suffix = Path(filename).suffix
+    if suffix in ["sh", "bash"]:
+        return "bash"
+    elif suffix == "py":
+        return "python"
+    else:
+        raise ValueError("Cannot guess language from {}".format(filename))
+
+
+def get_suffix_from_language(language):
+    """Determine suffix from language."""
+    if language == "bash":
+        suffix = "sh"
+    elif language == "python":
+        suffix = "py"
+    return suffix
+
+
+class GMTPlotDirective(Directive):
+    """
+    The gmt-plot directive implementation.
+    """
+
+    has_content = True
+    required_arguments = 0
+    optional_arguments = 1
+    final_argument_whitespace = False
+
+    # options list of literalinclude directive
+    options_code = {
+        "dedent": int,
+        "linenos": directives.flag,
+        "lineno-start": int,
+        "lineno-match": directives.flag,
+        "tab-width": int,
+        "language": _option_language,
+        "encoding": directives.encoding,
+        "lines": directives.unchanged_required,
+        "start-after": directives.unchanged_required,
+        "end-before": directives.unchanged_required,
+        "start-at": directives.unchanged_required,
+        "end-at": directives.unchanged_required,
+        "prepend": directives.unchanged_required,
+        "append": directives.unchanged_required,
+        "emphasize-lines": directives.unchanged_required,
+        "name": directives.unchanged,
+    }
+    # options list of figure directive
+    options_figure = {
+        "alt": directives.unchanged,
+        "height": directives.length_or_unitless,
+        "width": directives.length_or_percentage_or_unitless,
+        "scale": directives.nonnegative_int,
+        "align": _option_align,
+        "class": directives.class_option,
+    }
+    option_spec = {
+        "show-code": _option_boolean,
+        "caption": directives.unchanged,
+        **options_code,
+        **options_figure,
+    }
+
+    def run(self):
+        document = self.state_machine.document
+        env = self.state_machine.document.settings.env
+        config = self.state_machine.document.settings.env.config
+
+        # set options to default values if not specified
+        self.options.setdefault("show-code", config.gmtplot_show_code)
+
+        # Get the name of the rst source file we are currently processing
+        rst_file = Path(document["source"])
+
+        # current working directory of the rst source file
+        cwd = rst_file.parent
+
+        counter = env.new_serialno("gmtplot")
+        output_base = "{}-gmtplot-{}".format(rst_file.stem, counter)
+
+        if self.arguments:  # load codes from a file
+            # Guess langauge from suffix of the script
+            if "language" not in self.options:
+                self.options["language"] = guess_language(self.arguments[0])
+
+            # Get absolute path of the script
+            if config.gmtplot_basedir:  # relative to gmtplot_basedir
+                code_basedir = Path(env.app.srcdir, config.gmtplot_basedir)
+            elif Path(self.arguments[0]).is_absolute():  # relative to source directory
+                code_basedir = Path(env.app.srcdir)
+            else:  # relative to current rst file's path
+                code_basedir = Path(cwd)
+            code_file = Path(code_basedir, self.arguments[0]).absolute()
+            code_basedir = code_file.parent
+            code = code_file.read_text(encoding="utf-8")
+
+            # If there is content, it will be passed as a caption.
+            caption = "\n".join(self.content)
+        else:  # inline codes
+            self.options.setdefault("language", config.highlight_language)
+            code_basedir = cwd
+            code = textwrap.dedent("\n".join(map(str, self.content)))
+            caption = ""
+
+        # determine unique code filename under current working directory
+        suffix = get_suffix_from_language(self.options["language"])
+        code_file = Path(cwd, "{}.{}".format(output_base, suffix))
+
+        # determine figure captions
+        if "caption" in self.options:
+            caption = self.options["caption"]
+        caption = "\n".join("      " + line.strip() for line in caption.split("\n"))
+
+        if self.options["show-code"]:
+            code_opts = []
+            for key, val in self.options.items():
+                if key == "linenos":
+                    code_opts.append(":{}:".format(key))
+                elif key in self.options_code.keys():
+                    code_opts.append(":{}: {}".format(key, val))
+        else:
+            code_opts = ""
+
+        image_opts = [
+            ":{}: {}".format(key, val)
+            for key, val in self.options.items()
+            if key in self.options_figure.keys()
+        ]
+
+        # builddir: where to place output files (temporarily)
+        builddir = (
+            Path(env.app.doctreedir).parent
+            / "gmtplot_directive"
+            / cwd.relative_to(env.app.srcdir)
         )
-    # Always skip the node because we're inserting things directly into the HTML body
-    raise nodes.SkipNode
+        # determine how to link to files in builddir from the RST file
+        # use os.path.relpath rather than relative_to!
+        builddir_link = Path("/", os.path.relpath(builddir, env.app.srcdir))
 
+        # copy script to builddir
+        builddir.mkdir(parents=True, exist_ok=True)
+        Path(builddir, code_file.name).write_text(code, encoding="utf-8")
 
-def generic_visit_gmt_plot(self, node):  # pylint: disable=unused-argument
-    """
-    Execute code and generate output for other formats.
-    """
-    # Should generate PNGs and insert them here
-    self.body.append(_("[ GMT Figure ]"))
-    raise nodes.SkipNode
+        # make figures
+        image = render_figure(
+            code, code_basedir, self.options["language"], builddir, output_base
+        )
 
+        gmtplot_block = (
+            jinja2.Template(TEMPLATE)
+            .render(
+                show_code=self.options["show-code"],
+                code=builddir_link / code_file.name,
+                code_opts=code_opts,
+                image=builddir_link / image,
+                image_opts=image_opts,
+                caption=caption,
+            )
+            .split("\n")
+        )
+        gmtplot_block.extend("\n")
+        self.state_machine.insert_input(gmtplot_block, source=str(rst_file))
 
-def depart_gmt_plot(self, node):  # pylint: disable=unused-argument
-    """
-    Actions to take at the end of a plot directive.
-    """
-    return None
-
-
-def purge_namespaces(app, env, docname):  # pylint: disable=unused-argument
-    """
-    Clean up the execution namespace.
-    """
-    if not hasattr(env, "gmt_namespaces"):
-        return
-    env.gmt_namespaces.pop(docname, {})
+        return []
 
 
 def setup(app):
     """
-    Add the directive to the sphinx app.
+    Add the gmt-plot directive to the sphinx app.
     """
     setup.app = app
     setup.config = app.config
     setup.confdir = app.confdir
+
     app.add_directive("gmt-plot", GMTPlotDirective)
-    app.add_node(
-        GMTPlotNode,
-        html=(html_visit_gmt_plot, depart_gmt_plot),
-        latex=(generic_visit_gmt_plot, depart_gmt_plot),
-        texinfo=(generic_visit_gmt_plot, depart_gmt_plot),
-        text=(generic_visit_gmt_plot, depart_gmt_plot),
-        man=(generic_visit_gmt_plot, depart_gmt_plot),
-    )
-    app.connect("env-purge-doc", purge_namespaces)
-    return {"version": "0.1"}
+    app.add_config_value("gmtplot_basedir", None, True)
+    app.add_config_value("gmtplot_show_code", True, True)
+    metadata = {
+        "version": "0.1.0",
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
+    return metadata
