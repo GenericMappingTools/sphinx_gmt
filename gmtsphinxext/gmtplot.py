@@ -331,6 +331,7 @@ class GMTPlotDirective(Directive):
 
         # set options to default values if not specified
         self.options.setdefault("show-code", config.gmtplot_show_code)
+        self.options.setdefault("align", config.gmtplot_figure_align)
 
         # Get the name of the rst source file we are currently processing
         rst_file = Path(document["source"])
@@ -435,6 +436,7 @@ def setup(app):
     app.add_directive("gmt-plot", GMTPlotDirective)
     app.add_config_value("gmtplot_basedir", None, True)
     app.add_config_value("gmtplot_show_code", True, True)
+    app.add_config_value("gmtplot_figure_align", "center", True)
     metadata = {
         "version": "0.1.0",
         "parallel_read_safe": True,
