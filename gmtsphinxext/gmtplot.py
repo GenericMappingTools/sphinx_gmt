@@ -340,6 +340,7 @@ class GMTPlotDirective(Directive):
 
         counter = env.new_serialno("gmtplot")
         output_base = "{}-gmtplot-{}".format(rst_file.stem, counter)
+        caption = ""
 
         if self.arguments:  # load codes from a file
             # Guess langauge from suffix of the script
@@ -363,16 +364,12 @@ class GMTPlotDirective(Directive):
             self.options.setdefault("language", config.highlight_language)
             code_basedir = cwd
             code = textwrap.dedent("\n".join(map(str, self.content)))
-            caption = ""
+            if "caption" in self.options:
+                caption = self.options["caption"]
 
         # determine unique code filename under current working directory
         suffix = get_suffix_from_language(self.options["language"])
         code_file = Path(cwd, "{}.{}".format(output_base, suffix))
-
-        # determine figure captions
-        if "caption" in self.options:
-            caption = self.options["caption"]
-        caption = "\n".join("      " + line.strip() for line in caption.split("\n"))
 
         if self.options["show-code"]:
             code_opts = []
