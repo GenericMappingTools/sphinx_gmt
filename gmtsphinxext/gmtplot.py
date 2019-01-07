@@ -115,12 +115,28 @@ def _option_align(arg):
 def _set_gmt_datadir(cwd):
     """Set evirionment variable GMT_DATADIR so that script can access
     its data files.
+
+    Retures
+    =======
+
+    old_gmt_datadir : str
+        Previous value of GMT_DATADIR.
     """
-    if "GMT_DATADIR" not in os.environ:
-        os.environ["GMT_DATADIR"] = str(cwd)
-    else:
+    old_gmt_datadir = os.environ.get("GMT_DATADIR")
+    if old_gmt_datadir:
         sep = ";" if sys.platform == "win32" else ":"
         os.environ["GMT_DATADIR"] = str(cwd) + sep + os.environ["GMT_DATADIR"]
+    else:
+        os.environ["GMT_DATADIR"] = str(cwd)
+    return old_gmt_datadir
+
+
+def _reset_gmt_datadir(old_gmt_datadir):
+    """Reset environment variable GMT_DATADIR to its old value."""
+    if old_gmt_datadir:
+        os.environ['GMT_DATADIR'] = old_gmt_datadir
+    else:
+        del os.environ['GMT_DATADIR']
 
 
 def _search_images(cwd):
@@ -167,7 +183,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
     with tempfile.TemporaryDirectory() as tmpdir:
         Path(tmpdir, "script.sh").write_text(code, encoding="utf-8")
 
-        _set_gmt_datadir(code_dir)
+        old_gmt_datadir = _set_gmt_datadir(code_dir)
         proc = subprocess.run(
             "bash {}".format(Path(tmpdir, "script.sh")),
             shell=True,
@@ -175,6 +191,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
+        _reset_gmt_datadir(old_gmt_datadir)
         if proc.returncode != 0:
             raise RuntimeError(
                 "GMT bash failed:\nSTDOUT: {}\nSTDERR: {}".format(
@@ -222,11 +239,12 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
     cwd = os.getcwd()
     with tempfile.TemporaryDirectory() as tmpdir:
         os.chdir(tmpdir)
-        _set_gmt_datadir(code_dir)
+        old_gmt_datadir = _set_gmt_datadir(code_dir)
 
         for node in to_exec:
             compiled = compile(ast.Module([node]), filename=filename, mode="exec")
             exec(compiled)
+        _reset_gmt_datadir(old_gmt_datadir)
 
         images = _search_images(tmpdir)
         if images:
