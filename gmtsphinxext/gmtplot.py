@@ -262,9 +262,10 @@ def render_figure(code, code_dir, language, output_dir, output_base):
 def guess_language(filename):
     """Guess language from suffix of the script."""
     suffix = Path(filename).suffix
-    if suffix in ["sh", "bash"]:
+    print(suffix)
+    if suffix in [".sh", ".bash"]:
         return "bash"
-    elif suffix == "py":
+    elif suffix == ".py":
         return "python"
     else:
         raise ValueError("Cannot guess language from {}".format(filename))
