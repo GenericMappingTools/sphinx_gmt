@@ -134,9 +134,9 @@ def _set_gmt_datadir(cwd):
 def _reset_gmt_datadir(old_gmt_datadir):
     """Reset environment variable GMT_DATADIR to its old value."""
     if old_gmt_datadir:
-        os.environ['GMT_DATADIR'] = old_gmt_datadir
+        os.environ["GMT_DATADIR"] = old_gmt_datadir
     else:
-        del os.environ['GMT_DATADIR']
+        del os.environ["GMT_DATADIR"]
 
 
 def _search_images(cwd):
@@ -368,7 +368,9 @@ class GMTPlotDirective(Directive):
 
             # Get absolute path of the script
             if config.gmtplot_basedir:  # relative to gmtplot_basedir
-                code_file = Path(env.app.srcdir, config.gmtplot_basedir, self.arguments[0])
+                code_file = Path(
+                    env.app.srcdir, config.gmtplot_basedir, self.arguments[0]
+                )
             elif Path(self.arguments[0]).is_absolute():  # relative to source directory
                 code_file = Path(env.app.srcdir, self.arguments[0][1:])
             else:  # relative to current rst file's path
