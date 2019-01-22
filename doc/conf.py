@@ -39,7 +39,7 @@ master_doc = "index"
 # General information about the project
 year = datetime.date.today().year
 project = "gmtsphinxext"
-copyright = "2018, The GMT Developers"
+copyright = "2018-2019, The GMT Developers"
 if len(__version__.split("+")) > 1 or __version__ == "unknown":
     version = "dev"
 else:
