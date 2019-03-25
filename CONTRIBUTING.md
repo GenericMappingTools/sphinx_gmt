@@ -12,7 +12,7 @@ There are many ways to contribute:
 * Writing code which can be incorporated into project for everyone to use
 
 If you get stuck at any point you can create an [issue on
-GitHub](https://github.com/GenericMappingTools/gmtsphinxext/issues) or contact us at one
+GitHub](https://github.com/GenericMappingTools/sphinx_gmt/issues) or contact us at one
 of the other channels mentioned below.
 
 For more information on contributing to open source projects,
@@ -33,10 +33,10 @@ encourage all to read it carefully.
 
 ## What Can I Do?
 
-* Tackle any [issues](https://github.com/GenericMappingTools/gmtsphinxext/issues)
+* Tackle any [issues](https://github.com/GenericMappingTools/sphinx_gmt/issues)
   you wish! We have a special label for issues that beginners might want to
   try. Have a look at our
-  ["good first issues" list](https://github.com/GenericMappingTools/gmtsphinxext/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+  ["good first issues" list](https://github.com/GenericMappingTools/sphinx_gmt/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 * Contribute code you already have. It doesn’t need to be perfect! We will help
   you clean things up, test it, etc.
 * Make a tutorial or example of how to do something.
@@ -48,7 +48,7 @@ encourage all to read it carefully.
 
 Discussion often happens in the issue tracker and in pull requests.
 In addition, there is
-[Gitter chat room](https://gitter.im/GenericMappingTools/gmtsphinxext)
+[Gitter chat room](https://gitter.im/GenericMappingTools/sphinx_gmt)
 for the project as well.
 
 
@@ -113,14 +113,14 @@ It will make your life a lot easier!
 Once you have forked and clone the repository to your local machine,
 create an isolated environment for you to work:
 
-    cd gmtsphinxext
+    cd sphinx_gmt
     conda env create
 
-This will install all you need from conda-forge into a `gmtsphinxext`
+This will install all you need from conda-forge into a `sphinx_gmt`
 environment.
 Activate it by running:
 
-    source activate gmtsphinxext
+    source activate sphinx_gmt
 
 
 ## Automation

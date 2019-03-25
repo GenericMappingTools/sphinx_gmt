@@ -4,4 +4,4 @@ include CODE_OF_CONDUCT.md
 include CONTRIBUTING.md
 include AUTHORS.md
 include versioneer.py
-include gmtsphinxext/_version.py
+include sphinx_gmt/_version.py

@@ -30,12 +30,12 @@ Installing the latest development version
 
 You can use ``pip`` to install the latest source from Github::
 
-    pip install https://github.com/GenericMappingTools/gmtsphinxext/archive/master.zip
+    pip install https://github.com/GenericMappingTools/sphinx_gmt/archive/master.zip
 
 Alternatively, you can clone the git repository locally and install from there::
 
-    git clone https://github.com/GenericMappingTools/gmtsphinxext.git
-    cd gmtsphinxext
+    git clone https://github.com/GenericMappingTools/sphinx_gmt.git
+    cd sphinx_gmt
     pip install .
 
 
@@ -49,6 +49,6 @@ After installing the Python package, you'll have to enable each extension in you
 
     extensions = [
         ...,
-        "gmtsphinxext.gmtplot",
+        "sphinx_gmt.gmtplot",
     ]
 

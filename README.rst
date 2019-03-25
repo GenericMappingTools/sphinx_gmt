@@ -1,21 +1,21 @@
-gmtsphinxext
+sphinx_gmt
 ============
 
 **Sphinx extensions for GMT**
 
-`Documentation <https://genericmappingtools.github.io/gmtsphinxext>`__ |
-`Source Code <https://github.com/GenericMappingTools/gmtsphinxext>`__
+`Documentation <https://genericmappingtools.github.io/sphinx_gmt>`__ |
+`Source Code <https://github.com/GenericMappingTools/sphinx_gmt>`__
 
 
-.. image:: http://img.shields.io/pypi/v/gmtsphinxext.svg?style=flat-square
+.. image:: http://img.shields.io/pypi/v/sphinx_gmt.svg?style=flat-square
     :alt: Latest version on PyPI
-    :target: https://pypi.python.org/pypi/gmtsphinxext
-.. image:: http://img.shields.io/travis/GenericMappingTools/gmtsphinxext/master.svg?style=flat-square&label=linux|osx
+    :target: https://pypi.python.org/pypi/sphinx_gmt
+.. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/master.svg?style=flat-square&label=linux|osx
     :alt: Travis CI build status
-    :target: https://travis-ci.org/GenericMappingTools/gmtsphinxext
-.. image:: https://img.shields.io/pypi/pyversions/gmtsphinxext.svg?style=flat-square
+    :target: https://travis-ci.org/GenericMappingTools/sphinx_gmt
+.. image:: https://img.shields.io/pypi/pyversions/sphinx_gmt.svg?style=flat-square
     :alt: Compatible Python versions.
-    :target: https://pypi.python.org/pypi/gmtsphinxext
+    :target: https://pypi.python.org/pypi/sphinx_gmt
 
 
 About
@@ -29,11 +29,11 @@ Contacting Us
 -------------
 
 * Most discussion happens `on Github
-  <https://github.com/GenericMappingTools/gmtsphinxext>`__. Feel free to `open an issue
-  <https://github.com/GenericMappingTools/gmtsphinxext/issues/new>`__ or comment on any
+  <https://github.com/GenericMappingTools/sphinx_gmt>`__. Feel free to `open an issue
+  <https://github.com/GenericMappingTools/sphinx_gmt/issues/new>`__ or comment on any
   open issue or pull request.
 * This project is released with a `Contributor Code of Conduct
-  <https://github.com/GenericMappingTools/gmtsphinxext/blob/master/CODE_OF_CONDUCT.md>`__.
+  <https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md>`__.
   By participating in this project you agree to abide by its terms.
 
 
@@ -44,14 +44,14 @@ Code of conduct
 +++++++++++++++
 
 Please note that this project is released with a `Contributor Code of Conduct
-<https://github.com/GenericMappingTools/gmtsphinxext/blob/master/CODE_OF_CONDUCT.md>`__.
+<https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md>`__.
 By participating in this project you agree to abide by its terms.
 
 Contributing Guidelines
 +++++++++++++++++++++++
 
 Please read our `Contributing Guide
-<https://github.com/GenericMappingTools/gmtsphinxext/blob/master/CONTRIBUTING.md>`__ to
+<https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CONTRIBUTING.md>`__ to
 see how you can help and give feedback.
 
 Imposter syndrome disclaimer
@@ -82,4 +82,4 @@ License
 -------
 
 This is free software: you can redistribute it and/or modify it under the terms of the
-`BSD 3-clause License <https://github.com/GenericMappingTools/gmtsphinxext/blob/master/LICENSE.txt>`__.
+`BSD 3-clause License <https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt>`__.
