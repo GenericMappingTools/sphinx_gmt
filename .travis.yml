@@ -26,22 +26,22 @@ matrix:
     include:
         - os: linux
           env:
-              - PYTHON=3.5
-              - BUILD_DOCS=true
-        - os: linux
-          env:
               - PYTHON=3.6
               - CHECK=true
               - BUILD_DOCS=true
               - DEPLOY_DOCS=true
               - DEPLOY_PYPI=true
-        - os: osx
+        - os: linux
           env:
-              - PYTHON=3.5
+              - PYTHON=3.7
               - BUILD_DOCS=true
         - os: osx
           env:
               - PYTHON=3.6
+              - BUILD_DOCS=true
+        - os: osx
+          env:
+              - PYTHON=3.7
               - BUILD_DOCS=true
 
 before_install:
