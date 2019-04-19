@@ -47,9 +47,6 @@ encourage all to read it carefully.
 ## How Can I Talk to You?
 
 Discussion often happens in the issue tracker and in pull requests.
-In addition, there is
-[Gitter chat room](https://gitter.im/GenericMappingTools/sphinx_gmt)
-for the project as well.
 
 
 ## Reporting a Bug
