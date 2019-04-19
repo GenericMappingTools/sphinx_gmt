@@ -1,5 +1,5 @@
 # Build, package, test, and clean
-PROJECT=gmtsphinxext
+PROJECT=sphinx_gmt
 FORMAT_FILES=$(PROJECT) setup.py doc/conf.py
 LINT_FILES=$(PROJECT) setup.py
 

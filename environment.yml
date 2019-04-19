@@ -1,4 +1,4 @@
-name: gmtsphinxext
+name: sphinx_gmt
 channels:
     - conda-forge
     - defaults

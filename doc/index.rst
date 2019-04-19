@@ -1,4 +1,4 @@
-.. title:: gmtsphinxext
+.. title:: sphinx_gmt
 
 Sphinx extensions for the Generic Mapping Tools
 ===============================================

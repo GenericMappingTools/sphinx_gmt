@@ -8,14 +8,14 @@ from setuptools import setup, find_packages
 import versioneer
 
 
-NAME = "gmtsphinxext"
+NAME = "sphinx_gmt"
 FULLNAME = "GMT Sphinx Ext"
 AUTHOR = "Leonardo Uieda"
 AUTHOR_EMAIL = "leouieda@gmail.com"
 MAINTAINER = AUTHOR
 MAINTAINER_EMAIL = AUTHOR_EMAIL
 LICENSE = "BSD License"
-URL = "https://github.com/GenericMappingTools/gmtsphinxext"
+URL = "https://github.com/GenericMappingTools/sphinx_gmt"
 DESCRIPTION = "Sphinx extensions for the Generic Mapping Tools"
 KEYWORDS = ""
 with open("README.rst") as f:
