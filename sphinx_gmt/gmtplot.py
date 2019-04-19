@@ -231,7 +231,7 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
     tree = ast.parse(code, filename="<ast>", mode="exec")
     if (
         isinstance(tree.body[-1], ast.Expr) and tree.body[-1].value.func.attr == "show"
-    ):  # last statment is `fig.show()` in gmt-python
+    ):  # last statement is `fig.show()` in gmt-python
         to_exec, to_eval = tree.body[:-1], tree.body[-1:]
     else:
         to_exec, to_eval = tree.body, []
@@ -362,7 +362,7 @@ class GMTPlotDirective(Directive):
         caption = ""
 
         if self.arguments:  # load codes from a file
-            # Guess langauge from suffix of the script
+            # Guess language from suffix of the script
             if "language" not in self.options:
                 self.options["language"] = guess_language(self.arguments[0])
 
