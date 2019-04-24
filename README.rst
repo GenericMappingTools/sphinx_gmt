@@ -3,7 +3,7 @@ sphinx_gmt
 
 **Sphinx extensions for GMT**
 
-`Documentation <https://genericmappingtools.github.io/sphinx_gmt>`__ |
+`Documentation <https://www.generic-mapping-tools.org/sphinx_gmt>`__ |
 `Source Code <https://github.com/GenericMappingTools/sphinx_gmt>`__
 
 
