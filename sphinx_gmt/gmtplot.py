@@ -43,7 +43,7 @@ Additionally, this directive supports options of the `figure` and
 Configuration options
 ---------------------
 
-The plot directive has the following configuration options:
+The ``gmt-plot`` directive has the following configuration options:
 
     gmtplot_show_code
         Default value for the show-code option.
