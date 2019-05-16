@@ -94,6 +94,7 @@ def _option_language(arg):
 
 
 def _option_boolean(arg):
+    # pylint: disable=no-else-return
     """Check boolean options."""
     if not arg or not arg.strip():  # no argument given, assume used as a flag
         return True
@@ -140,6 +141,7 @@ def _reset_gmt_datadir(old_gmt_datadir):
 
 
 def _search_images(cwd):
+    # pylint: disable=no-else-return,no-else-raise
     """
     Search images in PNG and PDF format in a specified directory.
     If .png and .pdf files are not found and .ps file is found, then
@@ -224,6 +226,7 @@ class _CatchDisplay:  # pylint: disable=too-few-public-methods
 
 
 def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
+    # pylint: disable=exec-used
     """
     Execute a multi-line block of Python code and copy the generated image files
     to specified output directory.
@@ -242,8 +245,7 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
         old_gmt_datadir = _set_gmt_datadir(code_dir)
 
         for node in to_exec:
-            compiled = compile(ast.Module([node]), filename=filename, mode="exec")
-            exec(compiled)
+            exec(compile(ast.Module([node]), filename=filename, mode="exec"))
         _reset_gmt_datadir(old_gmt_datadir)
 
         images = _search_images(tmpdir)
@@ -254,10 +256,11 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
             catch_display = _CatchDisplay()
             with catch_display:
                 for node in to_eval:
-                    compiled = compile(
-                        ast.Interactive([node]), filename=filename, mode="single"
+                    exec(
+                        compile(
+                            ast.Interactive([node]), filename=filename, mode="single"
+                        )
                     )
-                    exec(compiled)
             Path(output_dir, output_base).with_suffix(".png").write_bytes(
                 catch_display.output.data
             )
@@ -278,6 +281,7 @@ def render_figure(code, code_dir, language, output_dir, output_base):
 
 
 def guess_language(filename):
+    # pylint: disable=no-else-return
     """Guess language from suffix of the script."""
     suffix = Path(filename).suffix
     if suffix in [".sh", ".bash"]:
@@ -343,6 +347,7 @@ class GMTPlotDirective(Directive):
     }
 
     def run(self):
+        # pylint: disable=too-many-locals
         document = self.state_machine.document
         env = self.state_machine.document.settings.env
         config = self.state_machine.document.settings.env.config
