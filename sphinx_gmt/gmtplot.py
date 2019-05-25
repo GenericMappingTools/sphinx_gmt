@@ -376,7 +376,7 @@ class GMTPlotDirective(Directive):
                 code_file = Path(
                     env.app.srcdir, config.gmtplot_basedir, self.arguments[0]
                 )
-            elif Path(self.arguments[0]).is_absolute():  # relative to source directory
+            elif self.arguments[0].startswith('/'):  # relative to source directory
                 code_file = Path(env.app.srcdir, self.arguments[0][1:])
             else:  # relative to current rst file's path
                 code_file = Path(cwd, self.arguments[0])
