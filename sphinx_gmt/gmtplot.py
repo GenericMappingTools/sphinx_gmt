@@ -252,7 +252,9 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
         images = _search_images(tmpdir)
         if images:
             for image in images:
-                shutil.move(image, Path(output_dir, output_base).with_suffix(image.suffix))
+                shutil.move(
+                    image, Path(output_dir, output_base).with_suffix(image.suffix)
+                )
         else:
             catch_display = _CatchDisplay()
             with catch_display:
