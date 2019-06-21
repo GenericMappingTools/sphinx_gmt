@@ -15,6 +15,10 @@ h1 {
     font-size: 200%;
 }
 
+p.caption {
+    margin-top: 20px;
+}
+
 .gmtplot-output {
     width: 100%;
     overflow: auto;

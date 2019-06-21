@@ -3,11 +3,6 @@ import sys
 import os
 import datetime
 import sphinx_rtd_theme
-
-# Sphinx needs to be able to import the package to use autodoc and get the
-# version number
-sys.path.append(os.path.pardir)
-
 from sphinx_gmt import __version__, __commit__
 
 extensions = [
@@ -39,7 +34,7 @@ master_doc = "index"
 # General information about the project
 year = datetime.date.today().year
 project = "sphinx_gmt"
-copyright = "2018-2019, The GMT Developers"
+copyright = "2018-{}, The GMT Developers".format(year)
 if len(__version__.split("+")) > 1 or __version__ == "unknown":
     version = "dev"
 else:
@@ -72,11 +67,11 @@ html_context = {
             "https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CONTRIBUTING.md",
         ),
         (
-            '<i class="fa fa-book fa-fw"></i> Code of Conduct',
+            '<i class="fa fa-gavel fa-fw"></i> Code of Conduct',
             "https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md",
         ),
         (
-            '<i class="fa fa-gavel fa-fw"></i> License',
+            '<i class="fa fa-book fa-fw"></i> License',
             "https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt",
         ),
     ],
@@ -86,6 +81,7 @@ html_context = {
     "github_repo": "GenericMappingTools/sphinx_gmt",
     "github_version": "master",
 }
+
 
 # Load the custom CSS files (needs sphinx >= 1.6 for this to work)
 def setup(app):

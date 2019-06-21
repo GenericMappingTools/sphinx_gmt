@@ -1,40 +1,52 @@
 sphinx_gmt
-============
+==========
 
-**Sphinx extensions for GMT**
+   Sphinx extensions for the Generic Mapping Tools
 
 `Documentation <https://www.generic-mapping-tools.org/sphinx_gmt>`__ |
+`Documentation (development version) <https://www.generic-mapping-tools.org/sphinx_gmt/dev>`__ |
 `Source Code <https://github.com/GenericMappingTools/sphinx_gmt>`__
-
 
 .. image:: http://img.shields.io/pypi/v/sphinx_gmt.svg?style=flat-square
     :alt: Latest version on PyPI
     :target: https://pypi.python.org/pypi/sphinx_gmt
-.. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/master.svg?style=flat-square&label=linux|osx
+.. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/master.svg?style=flat-square&label=TravisCI
     :alt: Travis CI build status
     :target: https://travis-ci.org/GenericMappingTools/sphinx_gmt
 .. image:: https://img.shields.io/pypi/pyversions/sphinx_gmt.svg?style=flat-square
     :alt: Compatible Python versions.
     :target: https://pypi.python.org/pypi/sphinx_gmt
 
+.. placeholder-for-doc-index
+
 
 About
 -----
 
-Sphinx extensions for inserting GMT plots in your documents and managing the GMT
-documentation.
+This package provides a `Sphinx <http://www.sphinx-doc.org/>`__ extension for
+including `GMT <http://gmt.soest.hawaii.edu/>`__ code and figures in your
+documentation. The extension defines the ``gmt-plot`` directive that
+will execute the given code and insert the generated figure into the document
+(like the `matplotlib <https://matplotlib.org/>`__ ``plot`` directive).
+
+
+Features
+--------
+
+- Supports any version of GMT
+- Works with both Bash and Python (`PyGMT <https://www.pygmt.org/>`__)
+- Include code inline or load from a script
+- Options to show/hide the code, insert captions, link to hidden code, etc.
 
 
 Contacting Us
 -------------
 
-* Most discussion happens `on Github
-  <https://github.com/GenericMappingTools/sphinx_gmt>`__. Feel free to `open an issue
-  <https://github.com/GenericMappingTools/sphinx_gmt/issues/new>`__ or comment on any
-  open issue or pull request.
-* This project is released with a `Contributor Code of Conduct
-  <https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md>`__.
-  By participating in this project you agree to abide by its terms.
+Most discussion happens
+`on Github <https://github.com/GenericMappingTools/sphinx_gmt>`__.
+Feel free to
+`open an issue <https://github.com/GenericMappingTools/sphinx_gmt/issues/new>`__
+or comment on any open issue or pull request.
 
 
 Contributing
@@ -81,5 +93,6 @@ mistakes. That's how we all improve and we are happy to help others learn.
 License
 -------
 
-This is free software: you can redistribute it and/or modify it under the terms of the
-`BSD 3-clause License <https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt>`__.
+This is free software: you can redistribute it and/or modify it under the terms
+of the **BSD 3-clause License**. A copy of this license is provided in
+`LICENSE.txt <https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt>`__.

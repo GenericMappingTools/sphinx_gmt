@@ -1,58 +1,38 @@
 """
 A directive for including a GMT plot in a Sphinx document.
 
-The source code for the GMT plot may be included in one of two ways:
-
-1.  **A path to a source file** as the argument to the directive::
-
-        .. gmt-plot:: path/to/plot.sh
-
-            Optional caption for the plot
-
-2.  Included as **inline content** to the directive::
-
-        .. gmt-plot::
-            :language: bash
-
-            gmt begin map pdf
-            gmt basemap -JX10c/10c -R0/10/0/10 -Baf
-            gmt end
-
-    In this case, the `language` option needs to be specified if the
-    language is different from `highlight_language` variable in conf.py.
-
 Options
 -------
 
 The ``gmt-plot`` directive supports the following options:
 
     show-code : bool
-        Whether to display the source code. The default can be changed
-        using the `gmtplot_show_code` variable in conf.py.
+        Whether to display the source code. The default can be changed using the
+        ``gmtplot_show_code`` variable in ``conf.py``.
 
     language : {'python', 'bash'}
-        Specify the language of the source code. The default can be changed
-        using the `highlight_language` variable in conf.py.
+        Specify the language of the source code. The default can be changed using the
+        `highlight_language` variable in conf.py.
 
     caption : str
         Caption of the rendered figure.
 
-Additionally, this directive supports options of the `figure` and
-`literalinclude` directives.
+Additionally, this directive supports options of the ``figure`` and ``literalinclude``
+directives.
 
 Configuration options
 ---------------------
 
-The ``gmt-plot`` directive has the following configuration options:
+The following options can be set in ``conf.py`` and will apply globally:
 
-    gmtplot_show_code
-        Default value for the show-code option.
+    gmtplot_show_code : bool
+        Default value for the ``show-code`` option.
 
-    gmtplot_basedir
-        Base directory, to which ``gmt-plot`` file names are relative to.
-        If None or empty, file names are relative to the directory where
-        the file containing the directive is. However, if it is absolute
-        (starting with /), it is relative to the top source directory.
+    gmtplot_basedir : str
+        Base directory, to which ``gmt-plot`` file names are relative to. If None or
+        empty, file names are relative to the directory where the file containing the
+        directive is. However, if it is absolute (starting with ``/``), it is relative
+        to the top source directory.
 
 """
 
