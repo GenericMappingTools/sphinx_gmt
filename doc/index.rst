@@ -11,7 +11,7 @@ Convert this:
        :language: bash
        :show-code: false
 
-       gmt grdimage @earth_relief_15m.grd -Rg -JW10i -Baf -Cgeo > global_relief.ps
+       gmt pscoast -Rg -JW10i -Baf -Ggray > globe.ps
 
 into this:
 
@@ -20,7 +20,7 @@ into this:
     :show-code: false
     :caption: GMT plot automatically generated and included by the sphinx extension 🚀
 
-    gmt grdimage @earth_relief_15m.grd -Rg -JW10i -Baf -Cgeo > global_relief.ps
+    gmt pscoast -Rg -JW10i -Baf -Ggray > globe.ps
 
 .. include:: ../README.rst
     :start-after: placeholder-for-doc-index
