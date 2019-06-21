@@ -41,7 +41,7 @@ else:
     version = __version__
 
 html_last_updated_fmt = "%b %d, %Y"
-html_title = project
+html_title = "Sphinx Extensions for GMT"
 html_short_title = project
 html_logo = ""
 html_favicon = "_static/favicon.png"

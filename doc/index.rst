@@ -33,4 +33,6 @@ into this:
     install.rst
     gmtplot.rst
     api/index.rst
+    releases.rst
+    changes.rst
 
