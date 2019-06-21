@@ -7,7 +7,7 @@ Convert this:
 
 .. code::
 
-   .. gmt-plot::
+   .. gmtplot::
        :language: bash
        :show-code: false
 
@@ -15,7 +15,7 @@ Convert this:
 
 into this:
 
-.. gmt-plot::
+.. gmtplot::
     :language: bash
     :show-code: false
     :caption: GMT plot automatically generated and included by the sphinx extension 🚀

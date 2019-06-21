@@ -9,7 +9,7 @@ import versioneer
 
 
 NAME = "sphinx_gmt"
-FULLNAME = "GMT Sphinx Ext"
+FULLNAME = "GMT Sphinx Extensions"
 AUTHOR = "Leonardo Uieda"
 AUTHOR_EMAIL = "leouieda@gmail.com"
 MAINTAINER = AUTHOR
@@ -38,7 +38,7 @@ CLASSIFIERS = [
 ]
 PLATFORMS = "Any"
 PYTHON_REQUIRES = ">=3.6"
-INSTALL_REQUIRES = ["jinja2", "ipython", "sphinx"]
+INSTALL_REQUIRES = ["jinja2", "sphinx"]
 
 if __name__ == "__main__":
     setup(

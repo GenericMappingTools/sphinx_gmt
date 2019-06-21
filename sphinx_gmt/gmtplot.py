@@ -4,7 +4,7 @@ A directive for including a GMT plot in a Sphinx document.
 Options
 -------
 
-The ``gmt-plot`` directive supports the following options:
+The ``gmtplot`` directive supports the following options:
 
     show-code : bool
         Whether to display the source code. The default can be changed using the
@@ -29,7 +29,7 @@ The following options can be set in ``conf.py`` and will apply globally:
         Default value for the ``show-code`` option.
 
     gmtplot_basedir : str
-        Base directory, to which ``gmt-plot`` file names are relative to. If None or
+        Base directory, to which ``gmtplot`` file names are relative to. If None or
         empty, file names are relative to the directory where the file containing the
         directive is. However, if it is absolute (starting with ``/``), it is relative
         to the top source directory.
@@ -286,7 +286,7 @@ def get_suffix_from_language(language):
 
 class GMTPlotDirective(Directive):
     """
-    The gmt-plot directive implementation.
+    The gmtplot directive implementation.
     """
 
     has_content = True
@@ -435,13 +435,13 @@ class GMTPlotDirective(Directive):
 
 def setup(app):
     """
-    Add the gmt-plot directive to the sphinx app.
+    Add the gmtplot directive to the sphinx app.
     """
     setup.app = app
     setup.config = app.config
     setup.confdir = app.confdir
 
-    app.add_directive("gmt-plot", GMTPlotDirective)
+    app.add_directive("gmtplot", GMTPlotDirective)
     app.add_config_value("gmtplot_basedir", None, True)
     app.add_config_value("gmtplot_show_code", True, True)
     app.add_config_value("gmtplot_figure_align", "center", True)

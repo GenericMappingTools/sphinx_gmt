@@ -1,10 +1,10 @@
 .. _sphinxext:
 
-Including GMT Plots in Sphinx
+Including GMT plots in Sphinx
 =============================
 
-The extension defines the ``gmt-plot`` directive that will execute the given
-GMT codes and insert the generated figure into the document.
+The extension defines the :mod:`~sphinx_gmt.gmtplot` directive that will execute the
+given GMT codes and insert the generated figure into the document.
 
 Usage
 -----
@@ -13,7 +13,7 @@ The GMT codes may be included in one of two ways:
 
 1.  **A path to a source file** as the argument to the directive::
 
-        .. gmt-plot:: path/to/plot.sh
+        .. gmtplot:: path/to/plot.sh
 
            Optional caption for the plot
 
@@ -26,7 +26,7 @@ The GMT codes may be included in one of two ways:
 
 2.  Included as **inline content** to the directive::
 
-        .. gmt-plot::
+        .. gmtplot::
             :language: bash
 
             # place GMT codes here
@@ -45,7 +45,7 @@ The following RST code:
 
 .. code-block:: bash
 
-    .. gmt-plot::
+    .. gmtplot::
         :language: bash
         :caption: Example showing how to include GMT figures with inline codes
 
@@ -60,7 +60,7 @@ The following RST code:
 
 is executed by sphinx and turned into:
 
-.. gmt-plot::
+.. gmtplot::
     :language: bash
     :caption: Example showing how to include GMT figures with inline codes
 

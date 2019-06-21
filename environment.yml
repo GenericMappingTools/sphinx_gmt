@@ -7,9 +7,8 @@ dependencies:
     - pip
     - gmt
     - jinja2
-    - ipython
-    - sphinx
+    - sphinx=1.8.5
     - sphinx_rtd_theme
     - numpydoc
     - black
-    - twine
+    - pylint
