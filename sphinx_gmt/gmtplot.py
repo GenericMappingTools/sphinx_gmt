@@ -59,6 +59,7 @@ The ``gmt-plot`` directive has the following configuration options:
 import os
 import sys
 import ast
+import shutil
 import tempfile
 import subprocess
 import textwrap
@@ -201,7 +202,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
                 )
             )
         for image in _search_images(tmpdir):
-            image.rename(Path(output_dir, output_base).with_suffix(image.suffix))
+            shutil.move(image, Path(output_dir, output_base).with_suffix(image.suffix))
         return output_base + ".*"
 
 
@@ -251,7 +252,9 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
         images = _search_images(tmpdir)
         if images:
             for image in images:
-                image.rename(Path(output_dir, output_base).with_suffix(image.suffix))
+                shutil.move(
+                    image, Path(output_dir, output_base).with_suffix(image.suffix)
+                )
         else:
             catch_display = _CatchDisplay()
             with catch_display:
