@@ -47,6 +47,7 @@ The following RST code:
 
     .. gmt-plot::
         :language: bash
+        :caption: Example showing how to include GMT figures with inline codes
 
         ps=example_05.ps
         gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP 2 MUL PI MUL 8 DIV COS EXCH NEG 10 DIV EXP MUL = sombrero.nc

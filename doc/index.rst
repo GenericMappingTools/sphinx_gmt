@@ -3,24 +3,34 @@
 Sphinx extensions for the Generic Mapping Tools
 ===============================================
 
-This package provdes a `Sphinx <http://www.sphinx-doc.org/>`__ extension for
-including `GMT <http://gmt.soest.hawaii.edu/>`__ codes and figures in your
-documentation. The extension defines the ``gmt-plot`` directive that
-will execute the given code and insert the generated figure into the document.
+Convert this:
 
-Features
---------
+.. code::
 
-- Support any versions of GMT
-- Support both Bash and Python (including `PyGMT <https://www.pygmt.org/>`__) scripts
-- Support both inline codes and loading codes from a script
-- Options to show/hide the codes and link to codes if codes are hidden
+   .. gmt-plot::
+       :language: bash
+       :show-code: false
+
+       gmt pscoast -Rg -JW10i -Baf -Ggray > globe.ps
+
+into this:
+
+.. gmt-plot::
+    :language: bash
+    :show-code: false
+    :caption: GMT plot automatically generated and included by the sphinx extension 🚀
+
+    gmt pscoast -Rg -JW10i -Baf -Ggray > globe.ps
+
+.. include:: ../README.rst
+    :start-after: placeholder-for-doc-index
 
 .. toctree::
     :maxdepth: 2
     :caption: Documentation
+    :hidden:
 
     install.rst
     gmtplot.rst
-    api.rst
+    api/index.rst
 
