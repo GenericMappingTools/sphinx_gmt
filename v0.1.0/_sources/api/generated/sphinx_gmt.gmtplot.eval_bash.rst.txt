@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.eval\_bash
+==============================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: eval_bash
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>

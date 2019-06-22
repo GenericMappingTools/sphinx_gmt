@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    
+        <title>sphinx_gmt.gmtplot.GMTPlotDirective &mdash; Sphinx Extensions for GMT</title>
+    
+
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="sphinx_gmt.gmtplot.Path" href="sphinx_gmt.gmtplot.Path.html" />
+    <link rel="prev" title="sphinx_gmt.gmtplot.Directive" href="sphinx_gmt.gmtplot.Directive.html" />
+    
+    <script src="../../_static/require.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+    <a href="../../index.html"><h2 class="sidebar-title">sphinx_gmt</h2></a>
+
+    
+        
+        
+            <div class="version">
+                v0.1.0
+            </div>
+        
+    
+
+    
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gmtplot.html">Including GMT plots in Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sphinx_gmt.gmtplot.html"><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.html#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.html#configuration-options">Configuration options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.Directive.html">sphinx_gmt.gmtplot.Directive</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sphinx_gmt.gmtplot.GMTPlotDirective</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.Path.html">sphinx_gmt.gmtplot.Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html">sphinx_gmt.gmtplot.eval_bash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.eval_python.html">sphinx_gmt.gmtplot.eval_python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.get_suffix_from_language.html">sphinx_gmt.gmtplot.get_suffix_from_language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.guess_language.html">sphinx_gmt.gmtplot.guess_language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.render_figure.html">sphinx_gmt.gmtplot.render_figure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.setup.html">sphinx_gmt.gmtplot.setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Previous versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">External links</span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CONTRIBUTING.md"><i class="fa fa-users fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md"><i class="fa fa-gavel fa-fw"></i> Code of Conduct</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt"><i class="fa fa-book fa-fw"></i> License</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sphinx_gmt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="sphinx_gmt.gmtplot.html"><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code></a> &raquo;</li>
+        
+      <li>sphinx_gmt.gmtplot.GMTPlotDirective</li>
+    
+    
+    <li class="source-link">
+        
+            
+                
+                
+                <a href="https://github.com/GenericMappingTools/sphinx_gmt/issues/new?title=Suggested%20improvement%20for%20api/generated/sphinx_gmt.gmtplot.GMTPlotDirective&body=Please%20describe%20what%20could%20be%20improved%20about%20this%20page%20or%20the%20typo/mistake%20that%20you%20found%3A"
+                   class="fa fa-github"> Improve this page</a>
+            
+        
+        
+    </li>
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sphinx-gmt-gmtplot-gmtplotdirective">
+<h1>sphinx_gmt.gmtplot.GMTPlotDirective<a class="headerlink" href="#sphinx-gmt-gmtplot-gmtplotdirective" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sphinx_gmt.gmtplot.GMTPlotDirective">
+<em class="property">class </em><code class="descclassname">sphinx_gmt.gmtplot.</code><code class="descname">GMTPlotDirective</code><span class="sig-paren">(</span><em>name</em>, <em>arguments</em>, <em>options</em>, <em>content</em>, <em>lineno</em>, <em>content_offset</em>, <em>block_text</em>, <em>state</em>, <em>state_machine</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/sphinx_gmt/gmtplot.html#GMTPlotDirective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sphinx_gmt.gmtplot.GMTPlotDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>The gmtplot directive implementation.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_name</span></code>(self,&nbsp;node)</td>
+<td>Append self.options[‘name’] to node[‘names’] if it exists.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_has_content</span></code>(self)</td>
+<td>Throw an ERROR-level DirectiveError if the directive doesn’t have contents.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">directive_error</span></code>(self,&nbsp;level,&nbsp;message)</td>
+<td>Return a DirectiveError suitable for being thrown as an exception.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>debug</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>error</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>info</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>run</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>severe</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>warning</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div style='clear:both'></div></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sphinx_gmt.gmtplot.Path.html" class="btn btn-neutral float-right" title="sphinx_gmt.gmtplot.Path" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sphinx_gmt.gmtplot.Directive.html" class="btn btn-neutral float-left" title="sphinx_gmt.gmtplot.Directive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2019, The GMT Developers
+      <span class="lastupdated">
+        Last updated on Jun 22, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

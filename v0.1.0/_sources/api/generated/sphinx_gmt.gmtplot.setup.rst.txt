@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.setup
+=========================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: setup
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>

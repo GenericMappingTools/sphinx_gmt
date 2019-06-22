@@ -1,0 +1,10 @@
+sphinx\_gmt.gmtplot.Path
+========================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autoclass:: Path
+
+.. raw:: html
+
+     <div style='clear:both'></div>
