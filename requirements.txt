@@ -1,8 +1,2 @@
 jinja2
-ipython
 sphinx
-# Development requirements
-gmt
-sphinx_rtd_theme
-numpydoc
-twine

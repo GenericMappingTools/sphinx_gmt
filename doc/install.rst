@@ -16,7 +16,6 @@ Dependencies
 * `GMT <http://gmt.soest.hawaii.edu/>`__
 * `sphinx <http://www.sphinx-doc.org>`__
 * `jinja2 <http://jinja.pocoo.org/>`__
-* `ipython <https://ipython.org/>`__
 
 
 Installing the latest development version

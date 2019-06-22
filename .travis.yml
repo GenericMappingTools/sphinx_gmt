@@ -20,26 +20,36 @@ env:
         - DEPLOY_DOCS=false
         - DEPLOY_PYPI=false
         - CONDA_REQUIREMENTS="requirements.txt"
+        - CONDA_INSTALL_EXTRA="sphinx=1.8.5 gmt sphinx_rtd_theme numpydoc twine"
 
 matrix:
     # Build under the following configurations
     include:
         - os: linux
+          name: "Style checks"
+          env:
+              - PYTHON=3.7
+              - CHECK=true
+              - CONDA_INSTALL_EXTRA="black pylint"
+        - os: linux
+          name: "Linux - Python 3.6 (deploy)"
           env:
               - PYTHON=3.6
-              - CHECK=true
               - BUILD_DOCS=true
               - DEPLOY_DOCS=true
               - DEPLOY_PYPI=true
         - os: linux
+          name: "Linux - Python 3.7"
           env:
               - PYTHON=3.7
               - BUILD_DOCS=true
         - os: osx
+          name: "OSX - Python 3.6"
           env:
               - PYTHON=3.6
               - BUILD_DOCS=true
         - os: osx
+          name: "OSX - Python 3.7"
           env:
               - PYTHON=3.7
               - BUILD_DOCS=true
@@ -61,7 +71,6 @@ install:
 script:
     # Check code for style and lint for code quality
     - if [ "$CHECK" == "true" ]; then
-        pip install black pylint;
         make check;
       fi
     # Build the documentation
