@@ -25,7 +25,7 @@ About
 
 This package provides a `Sphinx <http://www.sphinx-doc.org/>`__ extension for
 including `GMT <http://gmt.soest.hawaii.edu/>`__ code and figures in your
-documentation. The extension defines the ``gmt-plot`` directive that
+documentation. The extension defines the ``gmtplot`` directive that
 will execute the given code and insert the generated figure into the document
 (like the `matplotlib <https://matplotlib.org/>`__ ``plot`` directive).
 
