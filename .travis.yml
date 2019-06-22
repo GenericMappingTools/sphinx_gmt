@@ -20,39 +20,31 @@ env:
         - DEPLOY_DOCS=false
         - DEPLOY_PYPI=false
         - CONDA_REQUIREMENTS="requirements.txt"
-        - CONDA_INSTALL_EXTRA="sphinx=1.8.5 gmt sphinx_rtd_theme numpydoc twine"
 
 matrix:
     # Build under the following configurations
     include:
         - os: linux
-          name: "Style checks"
-          env:
-              - PYTHON=3.7
-              - CHECK=true
-              - CONDA_INSTALL_EXTRA="black pylint"
-        - os: linux
-          name: "Linux - Python 3.6 (deploy)"
+          name: "Python 3.6 (deploy)"
           env:
               - PYTHON=3.6
               - BUILD_DOCS=true
               - DEPLOY_DOCS=true
               - DEPLOY_PYPI=true
+              - CONDA_INSTALL_EXTRA="sphinx=1.8.5 gmt sphinx_rtd_theme numpydoc twine"
         - os: linux
-          name: "Linux - Python 3.7"
+          name: "Python 3.7"
           env:
               - PYTHON=3.7
               - BUILD_DOCS=true
-        - os: osx
-          name: "OSX - Python 3.6"
-          env:
-              - PYTHON=3.6
-              - BUILD_DOCS=true
-        - os: osx
-          name: "OSX - Python 3.7"
+              - CONDA_INSTALL_EXTRA="sphinx gmt sphinx_rtd_theme numpydoc"
+        - os: linux
+          name: "Python 3.7 | GMT 6"
           env:
               - PYTHON=3.7
               - BUILD_DOCS=true
+              - CONDA_INSTALL_EXTRA="sphinx gmt=6.0.0rc1 sphinx_rtd_theme numpydoc"
+              - CONDA_EXTRA_CHANNEL="conda-forge/label/dev"
 
 before_install:
     # Get the Fatiando CI scripts
@@ -69,14 +61,8 @@ install:
     - pip install dist/*
 
 script:
-    # Check code for style and lint for code quality
-    - if [ "$CHECK" == "true" ]; then
-        make check;
-      fi
     # Build the documentation
-    - if [ "$BUILD_DOCS" == "true" ]; then
-        make -C doc all;
-      fi
+    - make -C doc all
 
 deploy:
     # Make a release on PyPI
