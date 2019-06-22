@@ -10,8 +10,8 @@ import versioneer
 
 NAME = "sphinx_gmt"
 FULLNAME = "GMT Sphinx Extensions"
-AUTHOR = "Leonardo Uieda"
-AUTHOR_EMAIL = "leouieda@gmail.com"
+AUTHOR = "The GMT Developers"
+AUTHOR_EMAIL = ""
 MAINTAINER = AUTHOR
 MAINTAINER_EMAIL = AUTHOR_EMAIL
 LICENSE = "BSD License"
