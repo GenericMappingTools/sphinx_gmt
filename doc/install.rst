@@ -18,6 +18,23 @@ Dependencies
 * `jinja2 <http://jinja.pocoo.org/>`__
 
 
+Installing with conda
+---------------------
+
+You can install ``sphinx_gmt`` using the `conda package manager <https://conda.io/>`__
+that comes with the Anaconda distribution::
+
+    conda install sphinx_gmt --channel conda-forge
+
+
+Installing with pip
+-------------------
+
+Alternatively, you can also use the `pip package manager <https://pypi.org/project/pip/>`__::
+
+    pip install sphinx_gmt
+
+
 Installing the latest development version
 -----------------------------------------
 
