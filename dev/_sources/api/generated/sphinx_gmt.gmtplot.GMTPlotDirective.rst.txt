@@ -1,0 +1,10 @@
+sphinx\_gmt.gmtplot.GMTPlotDirective
+====================================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autoclass:: GMTPlotDirective
+
+.. raw:: html
+
+     <div style='clear:both'></div>

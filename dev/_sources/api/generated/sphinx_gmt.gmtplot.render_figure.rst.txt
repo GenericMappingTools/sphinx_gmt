@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.render\_figure
+==================================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: render_figure
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>
