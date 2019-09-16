@@ -163,6 +163,13 @@ def eval_bash(code, code_dir, output_dir, output_base):
     Execute a multi-line block of bash code and copy the generated image files
     to specified output directory.
     """
+    # Change "gmt end show" to "gmt end" to avoid displaying figures
+    lines = code.splitlines()
+    for i in range(len(lines)):
+        if lines[i].split() == ["gmt", "end", "show"]:
+            lines[i] = "gmt end"
+    code = "\n".join(lines)
+
     with tempfile.TemporaryDirectory() as tmpdir:
         Path(tmpdir, "script.sh").write_text(code, encoding="utf-8")
 
