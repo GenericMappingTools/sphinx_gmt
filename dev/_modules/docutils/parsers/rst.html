@@ -61,7 +61,7 @@
         
         
             <div class="version">
-                dev
+                v0.1.1
             </div>
         
     
@@ -176,7 +176,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for docutils.parsers.rst</h1><div class="highlight"><pre>
-<span></span><span class="c1"># $Id: __init__.py 8068 2017-05-08 22:10:39Z milde $</span>
+<span></span><span class="c1"># $Id: __init__.py 8258 2019-06-25 18:15:26Z milde $</span>
 <span class="c1"># Author: David Goodger &lt;goodger@python.org&gt;</span>
 <span class="c1"># Copyright: This module has been placed in the public domain.</span>
 
@@ -367,6 +367,9 @@
               <span class="n">inputstring</span><span class="p">,</span> <span class="n">tab_width</span><span class="o">=</span><span class="n">document</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">tab_width</span><span class="p">,</span>
               <span class="n">convert_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">statemachine</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputlines</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="n">inliner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inliner</span><span class="p">)</span>
+        <span class="c1"># restore the &quot;default&quot; default role after parsing a document</span>
+        <span class="k">if</span> <span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="n">roles</span><span class="o">.</span><span class="n">_roles</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">roles</span><span class="o">.</span><span class="n">_roles</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">finish_parse</span><span class="p">()</span>
 
 
@@ -603,7 +606,7 @@
     <p>
         &copy; Copyright 2018-2019, The GMT Developers
       <span class="lastupdated">
-        Last updated on Jun 22, 2019.
+        Last updated on Sep 17, 2019.
       </span>
 
     </p>

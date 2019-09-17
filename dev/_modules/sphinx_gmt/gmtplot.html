@@ -61,7 +61,7 @@
         
         
             <div class="version">
-                dev
+                v0.1.1
             </div>
         
     
@@ -341,6 +341,13 @@
 <span class="sd">    Execute a multi-line block of bash code and copy the generated image files</span>
 <span class="sd">    to specified output directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Change &quot;gmt end show&quot; to &quot;gmt end&quot; to avoid displaying figures</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;gmt&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="s2">&quot;show&quot;</span><span class="p">]:</span>
+            <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;gmt end&quot;</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
     <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
         <span class="n">Path</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;script.sh&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 
@@ -643,7 +650,7 @@
     <p>
         &copy; Copyright 2018-2019, The GMT Developers
       <span class="lastupdated">
-        Last updated on Jun 22, 2019.
+        Last updated on Sep 17, 2019.
       </span>
 
     </p>
