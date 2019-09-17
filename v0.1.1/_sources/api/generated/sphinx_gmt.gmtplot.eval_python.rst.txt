@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.eval\_python
+================================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: eval_python
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>

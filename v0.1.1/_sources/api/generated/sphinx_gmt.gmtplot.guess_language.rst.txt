@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.guess\_language
+===================================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: guess_language
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>
