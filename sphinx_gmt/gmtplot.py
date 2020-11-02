@@ -165,8 +165,8 @@ def eval_bash(code, code_dir, output_dir, output_base):
     """
     # Change "gmt end show" to "gmt end" to avoid displaying figures
     lines = code.splitlines()
-    for i in range(len(lines)):
-        if lines[i].split() == ["gmt", "end", "show"]:
+    for i, line in enumerate(lines):
+        if line.split() == ["gmt", "end", "show"]:
             lines[i] = "gmt end"
     code = "\n".join(lines)
 
