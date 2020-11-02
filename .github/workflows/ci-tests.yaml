@@ -22,7 +22,7 @@ jobs:
           python-version: 3.8
 
       - name: Install pacakges
-        run: pip install black pylint
+        run: pip install black pylint sphinx
 
       - name: Formatting check (black and pylint)
         run: make check
