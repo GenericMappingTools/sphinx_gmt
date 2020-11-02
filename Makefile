@@ -20,7 +20,7 @@ format:
 
 check:
 	black --check $(FORMAT_FILES)
-	pylint $(LINT_FILES)
+	#pylint $(LINT_FILES)
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
