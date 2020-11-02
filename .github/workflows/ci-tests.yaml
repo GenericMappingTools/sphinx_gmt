@@ -1,4 +1,4 @@
-# This workflow install sphinx_gmt, build documentation and run tests
+# This workflow install sphinx_gmt, and build documentation (i.e., running tests)
 
 name: Tests
 
@@ -22,7 +22,7 @@ jobs:
           python-version: 3.8
 
       - name: Install pacakges
-        run: pip install black pylint sphinx
+        run: pip install sphinx black pylint==2.2.0
 
       - name: Formatting check (black and pylint)
         run: make check
