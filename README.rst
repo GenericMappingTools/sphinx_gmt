@@ -13,9 +13,9 @@ sphinx_gmt
 .. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/master.svg?style=flat-square&label=TravisCI
     :alt: Travis CI build status
     :target: https://travis-ci.org/GenericMappingTools/sphinx_gmt
-.. image:: https://img.shields.io/azure-devops/build/GenericMappingTools/bbb4dc84-4f97-4154-974e-94d185052861/4/master.svg?label=Azure&style=flat-square
-    :alt: Azure Pipelines build status
-    :target: https://dev.azure.com/GenericMappingTools/sphinx_gmt/_build
+.. image:: https://github.com/GenericMappingTools/sphinx_gmt/workflows/Tests/badge.svg
+   :alt: GitHub Actions status
+   :target: https://github.com/GenericMappingTools/sphinx_gmt/actions
 .. image:: https://img.shields.io/pypi/pyversions/sphinx_gmt.svg?style=flat-square
     :alt: Compatible Python versions.
     :target: https://pypi.python.org/pypi/sphinx_gmt
