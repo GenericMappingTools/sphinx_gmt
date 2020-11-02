@@ -145,8 +145,8 @@ def _search_images(cwd):
             raise ValueError("More than one figure generated in one GMT plot.")
         elif len(ps_images) == 1:  # PS found
             cmd = "gmt psconvert -A -P -T{} {}"
-            subprocess.run(cmd.format("g", ps_images[0]), shell=True)
-            subprocess.run(cmd.format("f", ps_images[0]), shell=True)
+            subprocess.run(cmd.format("g", ps_images[0]), shell=True, check=False)
+            subprocess.run(cmd.format("f", ps_images[0]), shell=True, check=False)
             png_images = list(cwd.glob("*.png"))
             pdf_images = list(cwd.glob("*.pdf"))
 
@@ -165,8 +165,8 @@ def eval_bash(code, code_dir, output_dir, output_base):
     """
     # Change "gmt end show" to "gmt end" to avoid displaying figures
     lines = code.splitlines()
-    for i in range(len(lines)):
-        if lines[i].split() == ["gmt", "end", "show"]:
+    for i, line in enumerate(lines):
+        if line.split() == ["gmt", "end", "show"]:
             lines[i] = "gmt end"
     code = "\n".join(lines)
 
@@ -177,6 +177,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
         proc = subprocess.run(
             "bash {}".format(Path(tmpdir, "script.sh")),
             shell=True,
+            check=False,
             cwd=tmpdir,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

@@ -32,19 +32,6 @@ matrix:
               - DEPLOY_DOCS=true
               - DEPLOY_PYPI=true
               - CONDA_INSTALL_EXTRA="sphinx=1.8.5 gmt sphinx_rtd_theme numpydoc twine"
-        - os: linux
-          name: "Python 3.7"
-          env:
-              - PYTHON=3.7
-              - BUILD_DOCS=true
-              - CONDA_INSTALL_EXTRA="sphinx gmt sphinx_rtd_theme numpydoc"
-        - os: linux
-          name: "Python 3.7 | GMT 6"
-          env:
-              - PYTHON=3.7
-              - BUILD_DOCS=true
-              - CONDA_INSTALL_EXTRA="sphinx gmt=6.0.0rc1 sphinx_rtd_theme numpydoc"
-              - CONDA_EXTRA_CHANNEL="conda-forge/label/dev"
 
 before_install:
     # Get the Fatiando CI scripts
