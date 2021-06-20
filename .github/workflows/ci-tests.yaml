@@ -50,7 +50,7 @@ jobs:
 
       # Setup Miniconda
       - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v1.7.0
+        uses: conda-incubator/setup-miniconda@v2.1.1
         with:
           python-version: ${{ matrix.python-version }}
           channels: conda-forge
