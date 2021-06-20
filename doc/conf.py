@@ -47,6 +47,7 @@ html_short_title = project
 html_logo = ""
 html_favicon = "_static/favicon.png"
 html_static_path = ["_static"]
+html_css_files = ["style.css"]
 html_extra_path = [".nojekyll"]
 pygments_style = "default"
 add_function_parentheses = False
@@ -82,8 +83,3 @@ html_context = {
     "github_repo": "GenericMappingTools/sphinx_gmt",
     "github_version": "master",
 }
-
-
-# Load the custom CSS files (needs sphinx >= 1.6 for this to work)
-def setup(app):
-    app.add_stylesheet("style.css")
