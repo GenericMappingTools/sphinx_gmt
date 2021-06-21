@@ -19,10 +19,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install pacakges
-        run: pip install sphinx black pylint==2.2.0
+        run: pip install sphinx black pylint
 
       - name: Formatting check (black and pylint)
         run: make check
