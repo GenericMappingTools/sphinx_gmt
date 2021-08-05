@@ -130,7 +130,7 @@ Install the source as a development version (it will only be available
 inside the environment and changes to the source will take effect without
 reinstalling):
 
-    make develop
+    make install
 
 We use [Black](https://github.com/ambv/black) to format the code so we don't have to
 think about it. You don't have to worry about formatting the code yourself. Before
