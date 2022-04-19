@@ -194,8 +194,10 @@ def eval_bash(code, code_dir, output_dir, output_base):
         return output_base + ".*"
 
 
-class _CatchDisplay:  # pylint: disable=too-few-public-methods
+class _CatchDisplay:
     "Class to temporarily catch sys.displayhook"
+    # pylint: disable=too-few-public-methods
+    # pylint: disable=attribute-defined-outside-init
 
     def __init__(self):
         self.output = None

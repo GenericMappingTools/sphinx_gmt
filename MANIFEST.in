@@ -1,7 +1,6 @@
 prune .github*
 prune doc*
 exclude .gitignore
-exclude .pylintrc
 exclude .travis.yml
 exclude AUTHORSHIP.md
 exclude CODE_OF_CONDUCT.md
