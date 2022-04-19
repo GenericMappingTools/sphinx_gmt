@@ -84,7 +84,7 @@ def _option_boolean(arg):
     elif arg.strip().lower() in ("yes", "1", "true"):
         return True
     else:
-        raise ValueError('"{}" unknown boolean'.format(arg))
+        raise ValueError('f"{arg}" unknown boolean')
 
 
 def _option_align(arg):
@@ -175,7 +175,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
 
         old_gmt_datadir = _set_gmt_datadir(code_dir)
         proc = subprocess.run(
-            "bash {}".format(Path(tmpdir, "script.sh")),
+            f'bash {Path(tmpdir, "script.sh")}',
             shell=True,
             check=False,
             cwd=tmpdir,
@@ -185,9 +185,9 @@ def eval_bash(code, code_dir, output_dir, output_base):
         _reset_gmt_datadir(old_gmt_datadir)
         if proc.returncode != 0:
             raise RuntimeError(
-                "GMT bash failed:\nSTDOUT: {}\nSTDERR: {}".format(
-                    proc.stdout.decode("utf-8"), proc.stderr.decode("utf-8")
-                )
+                "GMT bash failed:\n"
+                'STDOUT: {proc.stdout.decode("utf-8")}\n'
+                'STDERR: {proc.stderr.decode("utf-8")}'
             )
         for image in _search_images(tmpdir):
             shutil.move(image, Path(output_dir, output_base).with_suffix(image.suffix))
@@ -280,7 +280,7 @@ def guess_language(filename):
     elif suffix == ".py":
         return "python"
     else:
-        raise ValueError("Cannot guess language from {}".format(filename))
+        raise ValueError(f"Cannot guess language from {filename}")
 
 
 def get_suffix_from_language(language):
@@ -354,7 +354,7 @@ class GMTPlotDirective(Directive):
         cwd = rst_file.parent
 
         counter = env.new_serialno("gmtplot")
-        output_base = "{}-gmtplot-{}".format(rst_file.stem, counter)
+        output_base = f"{rst_file.stem}-gmtplot-{counter}"
         caption = ""
 
         if self.arguments:  # load codes from a file
@@ -386,22 +386,22 @@ class GMTPlotDirective(Directive):
 
         # determine unique code filename under current working directory
         suffix = get_suffix_from_language(self.options["language"])
-        code_file = Path(cwd, "{}.{}".format(output_base, suffix))
+        code_file = Path(cwd, f"{output_base}.{suffix}")
 
         if self.options["show-code"]:
             code_opts = []
             for key, val in self.options.items():
                 if key == "linenos":
-                    code_opts.append(":{}:".format(key))
-                elif key in self.options_code.keys():
-                    code_opts.append(":{}: {}".format(key, val))
+                    code_opts.append(f":{key}:")
+                elif key in self.options_code:
+                    code_opts.append(f":{key}: {val}")
         else:
             code_opts = ""
 
         image_opts = [
-            ":{}: {}".format(key, val)
+            f":{key}: {val}"
             for key, val in self.options.items()
-            if key in self.options_figure.keys()
+            if key in self.options_figure
         ]
 
         # builddir: where to place output files (temporarily)
