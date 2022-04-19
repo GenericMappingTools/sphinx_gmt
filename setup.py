@@ -18,7 +18,7 @@ LICENSE = "BSD License"
 URL = "https://github.com/GenericMappingTools/sphinx_gmt"
 DESCRIPTION = "Sphinx extensions for the Generic Mapping Tools"
 KEYWORDS = ""
-with open("README.rst") as f:
+with open("README.rst", encoding="utf-8") as f:
     LONG_DESCRIPTION = "".join(f.readlines())
 VERSION = versioneer.get_version()
 CMDCLASS = versioneer.get_cmdclass()
@@ -36,7 +36,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "License :: OSI Approved :: {}".format(LICENSE),
+    f"License :: OSI Approved :: {LICENSE}",
 ]
 PLATFORMS = "Any"
 PYTHON_REQUIRES = ">=3.7"
