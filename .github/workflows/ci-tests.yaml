@@ -35,6 +35,9 @@ jobs:
       matrix:
         python-version: ['3.8', '3.10']
         os: [ubuntu-latest, macOS-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
       # Cancel previous runs that are not completed
       - name: Cancel Previous Runs
@@ -48,33 +51,34 @@ jobs:
           # fecth all history so that setuptools_scm works
           fetch-depth: 0
 
-      # Setup Miniconda
-      - name: Setup Miniconda
+      # Install Mambaforge with conda-forge dependencies
+      - name: Setup Mambaforge
         uses: conda-incubator/setup-miniconda@v2.1.1
         with:
+          activate-environment: sphinx_gmt
           python-version: ${{ matrix.python-version }}
-          channels: conda-forge
-          miniconda-version: "latest"
+          channels: conda-forge,nodefaults
+          channel-priority: strict
+          miniforge-version: latest
+          miniforge-variant: Mambaforge
+          mamba-version: "*"
+          use-mamba: true
 
       # Install GMT and other required dependencies from conda-forge
       - name: Install GMT and required dependencies
-        shell: bash -l {0}
         run: |
-          conda install --yes gmt jinja2 sphinx sphinx_rtd_theme numpydoc
+          mamba install --yes gmt jinja2 sphinx sphinx_rtd_theme numpydoc
 
       # Show installed pkg information for postmortem diagnostic
       - name: List installed packages
-        shell: bash -l {0}
-        run: conda list
+        run: mamba list
 
       # Install the package that we want to test
       - name: Install the package
-        shell: bash -l {0}
         run: |
           python setup.py sdist --formats=zip
           pip install dist/*
 
       # Build the documentation
       - name: Build the documentation
-        shell: bash -l {0}
         run: make -C doc clean all
