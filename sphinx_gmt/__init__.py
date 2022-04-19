@@ -1,8 +1,8 @@
 """
 Sphinx extensions for GMT.
 """
-from pkg_resources import get_distribution
+from importlib.metadata import version
 
 # Get semantic version through setuptools-scm
-__version__ = f'v{get_distribution("pygmt").version}'  # e.g. v0.1.2.dev3+g0ab3cd78
-__commit__ = __version__.split("+g")[-1]  # 0ab3cd78
+__version__ = f'v{version("sphinx_gmt")}'  # e.g. v0.1.2.dev3+g0ab3cd78
+__commit__ = __version__.split("+g")[-1] if "+g" in __version__ else ""  # 0ab3cd78
