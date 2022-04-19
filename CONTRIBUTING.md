@@ -176,7 +176,7 @@ quickly:
 * Write documentation for your code (docstrings) and leave comments explaining
   the *reason* behind non-obvious things.
 * Follow the [PEP8](http://pep8.org) style guide for code and the [numpy
-  guide](https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt)
+  guide](https://github.com/numpy/numpy/blob/main/doc/HOWTO_DOCUMENT.rst.txt)
   for documentation.
 
 Pull requests will automatically have tests run by TravisCI.
@@ -189,4 +189,4 @@ If you have any trouble, leave a comment asking for help.
 ## Credit
 
 This guide was adapted from the [MetPy Contributing
-Guide](https://github.com/Unidata/MetPy/blob/master/CONTRIBUTING.md).
+Guide](https://github.com/Unidata/MetPy/blob/main/CONTRIBUTING.md).

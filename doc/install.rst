@@ -40,7 +40,7 @@ Installing the latest development version
 
 You can use ``pip`` to install the latest source from GitHub::
 
-    pip install https://github.com/GenericMappingTools/sphinx_gmt/archive/master.zip
+    pip install https://github.com/GenericMappingTools/sphinx_gmt/archive/main.zip
 
 Alternatively, you can clone the git repository locally and install from there::
 

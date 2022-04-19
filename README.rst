@@ -10,7 +10,7 @@ sphinx_gmt
 .. image:: http://img.shields.io/pypi/v/sphinx_gmt.svg?style=flat-square
     :alt: Latest version on PyPI
     :target: https://pypi.python.org/pypi/sphinx_gmt
-.. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/master.svg?style=flat-square&label=TravisCI
+.. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/main.svg?style=flat-square&label=TravisCI
     :alt: Travis CI build status
     :target: https://travis-ci.org/GenericMappingTools/sphinx_gmt
 .. image:: https://github.com/GenericMappingTools/sphinx_gmt/workflows/Tests/badge.svg
@@ -62,14 +62,14 @@ Code of conduct
 +++++++++++++++
 
 Please note that this project is released with a `Contributor Code of Conduct
-<https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md>`__.
+<https://github.com/GenericMappingTools/sphinx_gmt/blob/main/CODE_OF_CONDUCT.md>`__.
 By participating in this project you agree to abide by its terms.
 
 Contributing Guidelines
 +++++++++++++++++++++++
 
 Please read our `Contributing Guide
-<https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CONTRIBUTING.md>`__ to
+<https://github.com/GenericMappingTools/sphinx_gmt/blob/main/CONTRIBUTING.md>`__ to
 see how you can help and give feedback.
 
 Imposter syndrome disclaimer
@@ -101,4 +101,4 @@ License
 
 This is free software: you can redistribute it and/or modify it under the terms
 of the **BSD 3-clause License**. A copy of this license is provided in
-`LICENSE.txt <https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt>`__.
+`LICENSE.txt <https://github.com/GenericMappingTools/sphinx_gmt/blob/main/LICENSE.txt>`__.
