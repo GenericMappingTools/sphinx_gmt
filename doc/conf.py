@@ -66,20 +66,20 @@ html_context = {
         ),
         (
             '<i class="fa fa-users fa-fw"></i> Contributing',
-            "https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CONTRIBUTING.md",
+            "https://github.com/GenericMappingTools/sphinx_gmt/blob/main/CONTRIBUTING.md",
         ),
         (
             '<i class="fa fa-gavel fa-fw"></i> Code of Conduct',
-            "https://github.com/GenericMappingTools/sphinx_gmt/blob/master/CODE_OF_CONDUCT.md",
+            "https://github.com/GenericMappingTools/sphinx_gmt/blob/main/CODE_OF_CONDUCT.md",
         ),
         (
             '<i class="fa fa-book fa-fw"></i> License',
-            "https://github.com/GenericMappingTools/sphinx_gmt/blob/master/LICENSE.txt",
+            "https://github.com/GenericMappingTools/sphinx_gmt/blob/main/LICENSE.txt",
         ),
     ],
     # Custom variables to enable "Improve this page"" and "Download notebook"
     # links
     "doc_path": "doc",
     "github_repo": "GenericMappingTools/sphinx_gmt",
-    "github_version": "master",
+    "github_version": "main",
 }
