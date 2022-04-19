@@ -45,7 +45,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          # fecth all history so that versioneer works
+          # fecth all history so that setuptools_scm works
           fetch-depth: 0
 
       # Setup Miniconda

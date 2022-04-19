@@ -1,11 +1,7 @@
 """
 Build and install the project.
-
-Uses versioneer to manage version numbers using git tags.
 """
 from setuptools import setup, find_packages
-
-import versioneer
 
 
 NAME = "sphinx_gmt"
@@ -20,8 +16,6 @@ DESCRIPTION = "Sphinx extensions for the Generic Mapping Tools"
 KEYWORDS = ""
 with open("README.rst", encoding="utf-8") as f:
     LONG_DESCRIPTION = "".join(f.readlines())
-VERSION = versioneer.get_version()
-CMDCLASS = versioneer.get_cmdclass()
 PACKAGES = find_packages(exclude=["doc"])
 SCRIPTS = []
 PACKAGE_DATA = {}
@@ -41,6 +35,9 @@ CLASSIFIERS = [
 PLATFORMS = "Any"
 PYTHON_REQUIRES = ">=3.7"
 INSTALL_REQUIRES = ["jinja2", "sphinx"]
+# Configuration for setuptools-scm
+SETUP_REQUIRES = ["setuptools_scm"]
+USE_SCM_VERSION = {"local_scheme": "node-and-date"}
 
 if __name__ == "__main__":
     setup(
@@ -48,7 +45,7 @@ if __name__ == "__main__":
         fullname=FULLNAME,
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
-        version=VERSION,
+        use_scm_version=USE_SCM_VERSION,
         author=AUTHOR,
         author_email=AUTHOR_EMAIL,
         maintainer=MAINTAINER,
@@ -63,5 +60,5 @@ if __name__ == "__main__":
         keywords=KEYWORDS,
         python_requires=PYTHON_REQUIRES,
         install_requires=INSTALL_REQUIRES,
-        cmdclass=CMDCLASS,
+        setup_requires=SETUP_REQUIRES,
     )
