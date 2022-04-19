@@ -7,7 +7,7 @@ Installing
 Which Python?
 -------------
 
-You'll need **Python 3.7 or greater** to use this extension.
+You'll need **Python 3.8 or greater** to use this extension.
 
 
 Dependencies
