@@ -6,6 +6,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  release:
+    types:
+      - published
 
 jobs:
   style_check:
@@ -82,3 +85,11 @@ jobs:
       # Build the documentation
       - name: Build the documentation
         run: make -C doc clean all
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        if: github.event_name == 'release' && github.event.action == 'published'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./doc/_build/html
