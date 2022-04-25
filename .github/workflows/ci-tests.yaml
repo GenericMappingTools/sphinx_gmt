@@ -67,7 +67,7 @@ jobs:
       # Install GMT and other required dependencies from conda-forge
       - name: Install GMT and required dependencies
         run: |
-          mamba install --yes gmt jinja2 sphinx sphinx_rtd_theme numpydoc
+          mamba install --yes gmt jinja2 sphinx sphinx_rtd_theme numpydoc build
 
       # Show installed pkg information for postmortem diagnostic
       - name: List installed packages
@@ -76,7 +76,7 @@ jobs:
       # Install the package that we want to test
       - name: Install the package
         run: |
-          python setup.py sdist --formats=zip
+          python -m build --sdist
           pip install dist/*
 
       # Build the documentation
