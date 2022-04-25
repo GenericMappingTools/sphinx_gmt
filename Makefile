@@ -7,6 +7,7 @@ help:
 	@echo "Commands:"
 	@echo ""
 	@echo "    install       install in editable mode"
+	@echo "    package       build source and wheel distributions"
 	@echo "    check         run code quality checks (black and pylint)"
 	@echo "    format        run black to automatically format the code"
 	@echo "    clean         clean up build and generated files"
@@ -14,6 +15,9 @@ help:
 
 install:
 	pip install --no-deps -e .
+
+package:
+	python -m build --sdist --wheel
 
 format:
 	black $(FORMAT_FILES)
