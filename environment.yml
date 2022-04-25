@@ -3,13 +3,17 @@ channels:
     - conda-forge
     - defaults
 dependencies:
+    # Required dependencies
     - python=3.9
     - pip
     - gmt
     - jinja2
     - sphinx
+    # Dev dependencies (general)
+    - build
+    # Dev dependencies (building documentation)
     - sphinx_rtd_theme
     - numpydoc
-    - build
+    # Dev dependencies (formatting)
     - black
     - pylint
