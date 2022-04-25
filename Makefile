@@ -28,6 +28,7 @@ check:
 
 clean:
 	find . -name "*.pyc" -exec rm -v {} \;
-	rm -rvf build dist MANIFEST *.egg-info __pycache__ .coverage .cache
+	find . -type d -name  "__pycache__" -exec rm -rv {} +
+	rm -rvf build dist MANIFEST *.egg-info .coverage .cache
 	rm -rvf $(TESTDIR)
 	rm -rvf baseline
