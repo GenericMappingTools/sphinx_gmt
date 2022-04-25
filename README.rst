@@ -10,9 +10,6 @@ sphinx_gmt
 .. image:: http://img.shields.io/pypi/v/sphinx_gmt.svg?style=flat-square
     :alt: Latest version on PyPI
     :target: https://pypi.python.org/pypi/sphinx_gmt
-.. image:: http://img.shields.io/travis/GenericMappingTools/sphinx_gmt/main.svg?style=flat-square&label=TravisCI
-    :alt: Travis CI build status
-    :target: https://travis-ci.org/GenericMappingTools/sphinx_gmt
 .. image:: https://github.com/GenericMappingTools/sphinx_gmt/workflows/Tests/badge.svg
    :alt: GitHub Actions status
    :target: https://github.com/GenericMappingTools/sphinx_gmt/actions
