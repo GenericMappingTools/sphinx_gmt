@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.get\_suffix\_from\_language
+===============================================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: get_suffix_from_language
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>

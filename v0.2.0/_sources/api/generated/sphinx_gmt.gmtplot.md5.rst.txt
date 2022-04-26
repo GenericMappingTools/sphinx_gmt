@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.md5
+=======================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: md5
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>
