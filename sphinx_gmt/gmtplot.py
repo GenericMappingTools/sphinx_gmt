@@ -47,6 +47,7 @@ from pathlib import Path
 
 from docutils.parsers.rst import Directive, directives
 import jinja2
+from sphinx.util import md5
 
 
 TEMPLATE = """
@@ -100,7 +101,6 @@ def _set_gmt_datadir(cwd):
 
     Retures
     =======
-
     old_gmt_datadir : str
         Previous value of GMT_DATADIR.
     """
@@ -355,8 +355,6 @@ class GMTPlotDirective(Directive):
         # current working directory of the rst source file
         cwd = rst_file.parent
 
-        counter = env.new_serialno("gmtplot")
-        output_base = f"{rst_file.stem}-gmtplot-{counter}"
         caption = ""
 
         if self.arguments:  # load codes from a file
@@ -386,6 +384,9 @@ class GMTPlotDirective(Directive):
             if "caption" in self.options:
                 caption = self.options["caption"]
 
+        # use the md5sum value of the code as the basename of script and image files
+        output_base = md5(code.encode()).hexdigest()
+
         # determine unique code filename under current working directory
         suffix = get_suffix_from_language(self.options["language"])
         code_file = Path(cwd, f"{output_base}.{suffix}")
@@ -407,11 +408,7 @@ class GMTPlotDirective(Directive):
         ]
 
         # builddir: where to place output files (temporarily)
-        builddir = (
-            Path(env.app.doctreedir).parent
-            / "gmtplot_directive"
-            / cwd.relative_to(env.app.srcdir)
-        )
+        builddir = Path(env.app.doctreedir).parent / "gmtplot_directive"
         # determine how to link to files in builddir from the RST file
         # use os.path.relpath rather than relative_to!
         builddir_link = Path("/", os.path.relpath(str(builddir), env.app.srcdir))
