@@ -13,9 +13,9 @@ You'll need **Python 3.8 or greater** to use this extension.
 Dependencies
 ------------
 
-* `GMT <http://gmt.soest.hawaii.edu/>`__
+* `GMT <https://www.generic-mapping-tools.org/>`__
 * `sphinx <http://www.sphinx-doc.org>`__
-* `jinja2 <http://jinja.pocoo.org/>`__
+* `jinja2 <https://jinja.palletsprojects.com/>`__
 
 
 Installing with conda
