@@ -6,7 +6,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>sphinx_gmt.gmtplot.guess_language &mdash; Sphinx Extensions for GMT</title>
+        <title>sphinx_gmt.gmtplot.md5 &mdash; Sphinx Extensions for GMT</title>
     
 
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="sphinx_gmt.gmtplot.md5" href="sphinx_gmt.gmtplot.md5.html" />
-    <link rel="prev" title="sphinx_gmt.gmtplot.get_suffix_from_language" href="sphinx_gmt.gmtplot.get_suffix_from_language.html" />
+    <link rel="next" title="sphinx_gmt.gmtplot.render_figure" href="sphinx_gmt.gmtplot.render_figure.html" />
+    <link rel="prev" title="sphinx_gmt.gmtplot.guess_language" href="sphinx_gmt.gmtplot.guess_language.html" />
     
     <script src="../../_static/require.js"></script>
 
@@ -73,8 +73,8 @@
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html">sphinx_gmt.gmtplot.eval_bash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.eval_python.html">sphinx_gmt.gmtplot.eval_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.get_suffix_from_language.html">sphinx_gmt.gmtplot.get_suffix_from_language</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">sphinx_gmt.gmtplot.guess_language</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.md5.html">sphinx_gmt.gmtplot.md5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.guess_language.html">sphinx_gmt.gmtplot.guess_language</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sphinx_gmt.gmtplot.md5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.render_figure.html">sphinx_gmt.gmtplot.render_figure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.setup.html">sphinx_gmt.gmtplot.setup</a></li>
 </ul>
@@ -120,13 +120,13 @@
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">API Reference</a> &raquo;</li>
           <li><a href="sphinx_gmt.gmtplot.html"><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code></a> &raquo;</li>
-      <li>sphinx_gmt.gmtplot.guess_language</li>
+      <li>sphinx_gmt.gmtplot.md5</li>
     <li class="source-link">
         
             
                 
                 
-                <a href="https://github.com/GenericMappingTools/sphinx_gmt/issues/new?title=Suggested%20improvement%20for%20api/generated/sphinx_gmt.gmtplot.guess_language&body=Please%20describe%20what%20could%20be%20improved%20about%20this%20page%20or%20the%20typo/mistake%20that%20you%20found%3A"
+                <a href="https://github.com/GenericMappingTools/sphinx_gmt/issues/new?title=Suggested%20improvement%20for%20api/generated/sphinx_gmt.gmtplot.md5&body=Please%20describe%20what%20could%20be%20improved%20about%20this%20page%20or%20the%20typo/mistake%20that%20you%20found%3A"
                    class="fa fa-github"> Improve this page</a>
             
         
@@ -139,12 +139,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="sphinx-gmt-gmtplot-guess-language">
-<h1>sphinx_gmt.gmtplot.guess_language<a class="headerlink" href="#sphinx-gmt-gmtplot-guess-language" title="Permalink to this headline"></a></h1>
+  <section id="sphinx-gmt-gmtplot-md5">
+<h1>sphinx_gmt.gmtplot.md5<a class="headerlink" href="#sphinx-gmt-gmtplot-md5" title="Permalink to this headline"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="sphinx_gmt.gmtplot.guess_language">
-<span class="sig-prename descclassname"><span class="pre">sphinx_gmt.gmtplot.</span></span><span class="sig-name descname"><span class="pre">guess_language</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/sphinx_gmt/gmtplot.html#guess_language"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sphinx_gmt.gmtplot.guess_language" title="Permalink to this definition"></a></dt>
-<dd><p>Guess language from suffix of the script.</p>
+<dt class="sig sig-object py" id="sphinx_gmt.gmtplot.md5">
+<span class="sig-prename descclassname"><span class="pre">sphinx_gmt.gmtplot.</span></span><span class="sig-name descname"><span class="pre">md5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/sphinx/util.html#md5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sphinx_gmt.gmtplot.md5" title="Permalink to this definition"></a></dt>
+<dd><p>Wrapper around hashlib.md5</p>
+<p>Attempt call with ‘usedforsecurity=False’ if we get a ValueError, which happens when
+OpenSSL FIPS mode is enabled:
+ValueError: error:060800A3:digital envelope routines:EVP_DigestInit_ex:disabled for fips</p>
+<p>See: <a class="reference external" href="https://github.com/sphinx-doc/sphinx/issues/7611">https://github.com/sphinx-doc/sphinx/issues/7611</a></p>
 </dd></dl>
 
 <div style='clear:both'></div></section>
@@ -153,8 +157,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="sphinx_gmt.gmtplot.get_suffix_from_language.html" class="btn btn-neutral float-left" title="sphinx_gmt.gmtplot.get_suffix_from_language" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sphinx_gmt.gmtplot.md5.html" class="btn btn-neutral float-right" title="sphinx_gmt.gmtplot.md5" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sphinx_gmt.gmtplot.guess_language.html" class="btn btn-neutral float-left" title="sphinx_gmt.gmtplot.guess_language" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sphinx_gmt.gmtplot.render_figure.html" class="btn btn-neutral float-right" title="sphinx_gmt.gmtplot.render_figure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

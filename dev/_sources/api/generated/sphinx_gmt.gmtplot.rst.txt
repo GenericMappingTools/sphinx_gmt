@@ -43,6 +43,8 @@
 
   guess_language
 
+  md5
+
   render_figure
 
   setup

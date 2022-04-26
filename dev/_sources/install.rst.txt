@@ -7,15 +7,15 @@ Installing
 Which Python?
 -------------
 
-You'll need **Python 3.6 or greater** to use this extension.
+You'll need **Python 3.8 or greater** to use this extension.
 
 
 Dependencies
 ------------
 
-* `GMT <http://gmt.soest.hawaii.edu/>`__
+* `GMT <https://www.generic-mapping-tools.org/>`__
 * `sphinx <http://www.sphinx-doc.org>`__
-* `jinja2 <http://jinja.pocoo.org/>`__
+* `jinja2 <https://jinja.palletsprojects.com/>`__
 
 
 Installing with conda
@@ -40,7 +40,7 @@ Installing the latest development version
 
 You can use ``pip`` to install the latest source from GitHub::
 
-    pip install https://github.com/GenericMappingTools/sphinx_gmt/archive/master.zip
+    pip install https://github.com/GenericMappingTools/sphinx_gmt/archive/main.zip
 
 Alternatively, you can clone the git repository locally and install from there::
 

@@ -4,7 +4,7 @@ Previous versions
 =================
 
 Documentation for previous releases and the current development version (reflecting the
-*master* branch on Github) can be found at:
+*main* branch on Github) can be found at:
 
 * `Development <https://www.generic-mapping-tools.org/sphinx_gmt/dev>`__
 * `Latest release <https://www.generic-mapping-tools.org/sphinx_gmt/latest>`__
