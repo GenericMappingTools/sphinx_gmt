@@ -4,7 +4,6 @@ channels:
     - defaults
 dependencies:
     # Required dependencies
-    - python=3.9
     - pip
     - gmt
     - jinja2
