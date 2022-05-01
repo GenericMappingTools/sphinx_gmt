@@ -1,0 +1,58 @@
+.. raw:: html
+
+    <div class="api-module">
+
+``sphinx_gmt.gmtplot``
+---------------------------------
+
+.. raw:: html
+
+    <hr>
+
+.. automodule:: sphinx_gmt.gmtplot
+
+
+
+.. rubric:: Classes
+
+.. autosummary::
+  :toctree: ./
+
+  GMTPlotDirective
+
+
+
+
+
+
+
+.. rubric:: Functions
+
+.. autosummary::
+  :toctree: ./
+
+  environ
+
+  eval_bash
+
+  eval_python
+
+  get_suffix_from_language
+
+  guess_language
+
+  render_figure
+
+  setup
+
+
+
+
+
+
+
+
+
+.. raw:: html
+
+    </div>

@@ -1,0 +1,11 @@
+sphinx\_gmt.gmtplot.environ
+===========================
+
+.. currentmodule:: sphinx_gmt.gmtplot
+
+.. autofunction:: environ
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>

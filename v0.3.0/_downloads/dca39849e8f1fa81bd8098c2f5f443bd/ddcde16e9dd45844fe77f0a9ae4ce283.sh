@@ -1,0 +1,1 @@
+gmt pscoast -Rg -JW10i -Baf -Ggray > globe.ps

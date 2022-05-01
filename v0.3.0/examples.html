@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>Examples &mdash; Sphinx Extensions for GMT</title>
+    
+
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/index.html" />
+    <link rel="prev" title="Usage" href="usage.html" />
+    
+    <script src="_static/require.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+    <a href="index.html"><h2 class="sidebar-title">sphinx_gmt</h2></a>
+
+    
+        
+        
+            <div class="version">
+                v0.3.0
+            </div>
+        
+    
+
+    
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classic-gmt-bash-script">Classic GMT bash script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modern-gmt-bash-script">Modern GMT bash script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Previous versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+</ul>
+
+
+    
+        <p class="caption">
+            <span class="caption-text">External links</span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt/blob/main/CONTRIBUTING.md"><i class="fa fa-users fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt/blob/main/CODE_OF_CONDUCT.md"><i class="fa fa-gavel fa-fw"></i> Code of Conduct</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/GenericMappingTools/sphinx_gmt/blob/main/LICENSE.txt"><i class="fa fa-book fa-fw"></i> License</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">sphinx_gmt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Examples</li>
+    <li class="source-link">
+        
+            
+                <a href="https://github.com/GenericMappingTools/sphinx_gmt/edit/main/doc/examples"
+                   class="fa fa-github"> Improve this page</a>
+            
+        
+        
+    </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">gmtplot</span></code> directive supports any GMT versions, and both Bash and Python
+scripts.</p>
+<section id="classic-gmt-bash-script">
+<h2>Classic GMT bash script<a class="headerlink" href="#classic-gmt-bash-script" title="Permalink to this headline"></a></h2>
+<p>The following RST code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.. gmtplot::
+    :language: bash
+    :caption: Example showing how to include GMT figures with inline codes
+
+    <span class="nv">ps</span><span class="o">=</span>example_05.ps
+    gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP <span class="m">2</span> MUL PI MUL <span class="m">8</span> DIV COS EXCH NEG <span class="m">10</span> DIV EXP <span class="nv">MUL</span> <span class="o">=</span> sombrero.nc
+    gmt makecpt -C128 -T-5,5 -N &gt; g.cpt
+    gmt grdview sombrero.nc -JX6i -JZ2i -B5 -Bz0.5 -BSEwnZ -N-1+gwhite -Qs -I+a225+nt0.75 -X1.5i <span class="se">\</span>
+        -Cg.cpt -R-15/15/-15/15/-1/1 -K -p120/30 &gt; <span class="nv">$ps</span>
+    <span class="nb">echo</span> <span class="s2">&quot;4.1 5.5 z(r) = cos (2@~p@~r/8) @~\327@~e@+-r/10@+&quot;</span> <span class="p">|</span> gmt pstext -R0/11/0/8.5 -Jx1i <span class="se">\</span>
+            -F+f50p,ZapfChancery-MediumItalic+jBC -O &gt;&gt; <span class="nv">$ps</span>
+    rm -f g.cpt sombrero.nc
+</pre></div>
+</div>
+<p>is executed by sphinx and turned into:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ps</span><span class="o">=</span>example_05.ps
+gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP <span class="m">2</span> MUL PI MUL <span class="m">8</span> DIV COS EXCH NEG <span class="m">10</span> DIV EXP <span class="nv">MUL</span> <span class="o">=</span> sombrero.nc
+gmt makecpt -C128 -T-5,5 -N &gt; g.cpt
+gmt grdview sombrero.nc -JX6i -JZ2i -B5 -Bz0.5 -BSEwnZ -N-1+gwhite -Qs -I+a225+nt0.75 -X1.5i <span class="se">\</span>
+        -Cg.cpt -R-15/15/-15/15/-1/1 -K -p120/30 &gt; <span class="nv">$ps</span>
+<span class="nb">echo</span> <span class="s2">&quot;4.1 5.5 z(r) = cos (2@~p@~r/8) @~\327@~e@+-r/10@+&quot;</span> <span class="p">|</span> gmt pstext -R0/11/0/8.5 -Jx1i <span class="se">\</span>
+        -F+f50p,ZapfChancery-MediumItalic+jBC -O &gt;&gt; <span class="nv">$ps</span>
+rm -f g.cpt sombrero.nc
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-345544d6a7f3a553c55268e0a12efdcb">
+<img alt="_images/345544d6a7f3a553c55268e0a12efdcb.png" src="_images/345544d6a7f3a553c55268e0a12efdcb.png" />
+<figcaption>
+<p><span class="caption-text">Example showing how to include GMT figures with inline codes</span><a class="headerlink" href="#gmtplot-345544d6a7f3a553c55268e0a12efdcb" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="modern-gmt-bash-script">
+<h2>Modern GMT bash script<a class="headerlink" href="#modern-gmt-bash-script" title="Permalink to this headline"></a></h2>
+<p>We have a modern GMT bash script <code class="docutils literal notranslate"><span class="pre">example-gmt.sh</span></code> in the current directory.
+Its content is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gmt</span> <span class="n">begin</span> <span class="n">GMT_orthographic</span> <span class="n">png</span>
+    <span class="n">gmt</span> <span class="n">coast</span> <span class="o">-</span><span class="n">Rg</span> <span class="o">-</span><span class="n">JG</span><span class="o">-</span><span class="mi">75</span><span class="o">/</span><span class="mi">41</span><span class="o">/</span><span class="mi">12</span><span class="n">c</span> <span class="o">-</span><span class="n">Bg</span> <span class="o">-</span><span class="n">Dc</span> <span class="o">-</span><span class="n">A5000</span> <span class="o">-</span><span class="n">Gpink</span> <span class="o">-</span><span class="n">Sthistle</span>
+<span class="n">gmt</span> <span class="n">end</span> <span class="n">show</span>
+</pre></div>
+</div>
+<p>The following RST code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.. gmtplot:: example-gmt.sh
+    :width: <span class="m">30</span>%
+    :caption: GMT Orthographic projection
+</pre></div>
+</div>
+<p>is executed by sphinx and turned into:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt begin GMT_orthographic png
+    gmt coast -Rg -JG-75/41/12c -Bg -Dc -A5000 -Gpink -Sthistle
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-253b830c292ffa6e0dd9940186dad369">
+<a class="reference internal image-reference" href="_images/253b830c292ffa6e0dd9940186dad369.png"><img alt="_images/253b830c292ffa6e0dd9940186dad369.png" src="_images/253b830c292ffa6e0dd9940186dad369.png" style="width: 50%;" /></a>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018-2022, The GMT Developers.
+      <span class="lastupdated">Last updated on May 01, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
