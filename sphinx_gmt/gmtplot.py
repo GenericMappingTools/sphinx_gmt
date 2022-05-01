@@ -470,7 +470,7 @@ def setup(app):
     app.add_config_value("gmtplot_show_code", True, True)
     app.add_config_value("gmtplot_figure_align", "center", True)
     metadata = {
-        "version": "0.2.0",
+        "version": "0.3.0",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
