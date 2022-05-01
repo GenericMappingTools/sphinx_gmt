@@ -426,7 +426,7 @@ class GMTPlotDirective(Directive):
         builddir = Path(env.app.doctreedir).parent / "gmtplot_directive"
         # determine how to link to files in builddir from the RST file
         # use os.path.relpath rather than relative_to!
-        builddir_link = Path("/", os.path.relpath(str(builddir), env.app.srcdir))
+        builddir_link = "/" / Path("/", os.path.relpath(str(builddir), env.app.srcdir))
 
         # copy script to builddir
         builddir.mkdir(parents=True, exist_ok=True)
