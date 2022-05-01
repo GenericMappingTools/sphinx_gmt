@@ -36,19 +36,19 @@ The following options can be set in ``conf.py`` and will apply globally:
 
 """
 
-import os
-import sys
 import ast
+import os
 import shutil
-import tempfile
 import subprocess
+import sys
+import tempfile
 import textwrap
+from contextlib import contextmanager
 from pathlib import Path
 
-from docutils.parsers.rst import Directive, directives
 import jinja2
+from docutils.parsers.rst import Directive, directives
 from sphinx.util import md5
-
 
 TEMPLATE = """
 {%- if show_code -%}
@@ -121,6 +121,24 @@ def _reset_gmt_datadir(old_gmt_datadir):
         del os.environ["GMT_DATADIR"]
 
 
+@contextmanager
+def environ(env):
+    """
+    Temporarily set environment variables inside the context manager and
+    fully restore previous environment afterwards.
+    """
+    original_env = {key: os.getenv(key) for key in env}
+    os.environ.update(env)
+    try:
+        yield
+    finally:
+        for key, value in original_env.items():
+            if value is None:
+                del os.environ[key]
+            else:
+                os.environ[key] = value
+
+
 def _search_images(cwd):
     # pylint: disable=no-else-return,no-else-raise
     """
@@ -163,14 +181,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
     Execute a multi-line block of bash code and copy the generated image files
     to specified output directory.
     """
-    # Change "gmt end show" to "gmt end" to avoid displaying figures
-    lines = code.splitlines()
-    for i, line in enumerate(lines):
-        if line.split() == ["gmt", "end", "show"]:
-            lines[i] = "gmt end"
-    code = "\n".join(lines)
-
-    with tempfile.TemporaryDirectory() as tmpdir:
+    with tempfile.TemporaryDirectory() as tmpdir, environ({"GMT_END_SHOW": "off"}):
         Path(tmpdir, "script.sh").write_text(code, encoding="utf-8")
 
         old_gmt_datadir = _set_gmt_datadir(code_dir)
