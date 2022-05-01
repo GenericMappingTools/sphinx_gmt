@@ -236,7 +236,11 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
         old_gmt_datadir = _set_gmt_datadir(code_dir)
 
         for node in to_exec:
-            exec(compile(ast.Module([node]), filename=filename, mode="exec"))
+            exec(
+                compile(
+                    ast.Module([node], type_ignores=[]), filename=filename, mode="exec"
+                )
+            )
         _reset_gmt_datadir(old_gmt_datadir)
 
         images = _search_images(tmpdir)
