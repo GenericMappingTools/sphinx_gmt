@@ -61,6 +61,7 @@ TEMPLATE = """
 {%- endif %}
 
 .. figure:: {{ image }}
+    :name: {{ label }}
     {% for option in image_opts -%}
     {{ option }}
     {% endfor %}
@@ -440,6 +441,7 @@ class GMTPlotDirective(Directive):
         gmtplot_block = (
             jinja2.Template(TEMPLATE)
             .render(
+                label="gmtplot-" + output_base,
                 show_code=self.options["show-code"],
                 code=builddir_link / code_file.name,
                 code_opts=code_opts,
