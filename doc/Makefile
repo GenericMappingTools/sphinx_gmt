@@ -38,7 +38,7 @@ api:
 	@echo
 	@echo "Building API docs."
 	@echo
-	$(SPHINXAUTOGEN) -i -t _templates -o api/generated api/*.rst
+	$(SPHINXAUTOGEN) -t _templates -o api/generated api/*.rst
 
 linkcheck:
 	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
