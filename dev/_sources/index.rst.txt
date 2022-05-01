@@ -10,6 +10,7 @@ Convert this:
    .. gmtplot::
        :language: bash
        :show-code: false
+       :caption: GMT plot automatically generated and included by the sphinx extension 🚀
 
        gmt pscoast -Rg -JW10i -Baf -Ggray > globe.ps
 
@@ -31,7 +32,8 @@ into this:
     :hidden:
 
     install.rst
-    gmtplot.rst
+    usage.rst
+    examples.rst
     api/index.rst
     releases.rst
     changes.rst

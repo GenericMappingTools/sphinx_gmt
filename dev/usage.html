@@ -6,7 +6,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>Including GMT plots in Sphinx &mdash; Sphinx Extensions for GMT</title>
+        <title>Usage &mdash; Sphinx Extensions for GMT</title>
     
 
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,7 +24,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Reference" href="api/index.html" />
+    <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Installing" href="install.html" />
     
     <script src="_static/require.js"></script>
@@ -62,11 +62,8 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Including GMT plots in Sphinx</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Previous versions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
@@ -105,11 +102,11 @@
 <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Including GMT plots in Sphinx</li>
+      <li>Usage</li>
     <li class="source-link">
         
             
-                <a href="https://github.com/GenericMappingTools/sphinx_gmt/edit/main/doc/gmtplot"
+                <a href="https://github.com/GenericMappingTools/sphinx_gmt/edit/main/doc/usage"
                    class="fa fa-github"> Improve this page</a>
             
         
@@ -122,12 +119,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="including-gmt-plots-in-sphinx">
-<span id="sphinxext"></span><h1>Including GMT plots in Sphinx<a class="headerlink" href="#including-gmt-plots-in-sphinx" title="Permalink to this headline"></a></h1>
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h1>
 <p>The extension defines the <a class="reference internal" href="api/generated/sphinx_gmt.gmtplot.html#module-sphinx_gmt.gmtplot" title="sphinx_gmt.gmtplot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gmtplot</span></code></a> directive that will execute the
 given GMT codes and insert the generated figure into the document.</p>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>The GMT codes may be included in one of two ways:</p>
 <ol class="arabic">
 <li><p><strong>A path to a source file</strong> as the argument to the directive:</p>
@@ -137,10 +132,10 @@ given GMT codes and insert the generated figure into the document.</p>
 </pre></div>
 </div>
 <p>The source file name is usually relative to the current file’s path.
-However, if it is absolute (starting with <code class="docutils literal notranslate"><span class="pre">/</span></code>), it is relative to
+However, if it is an absolute path starting with <code class="docutils literal notranslate"><span class="pre">/</span></code>, it is relative to
 the top source directory.</p>
-<p>In this way, it will try to guess the script language from its file suffix.
-Supported suffixes are <code class="docutils literal notranslate"><span class="pre">.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">.bash</span></code> and <code class="docutils literal notranslate"><span class="pre">.py</span></code>.</p>
+<p>In this way, the directive will try to guess the script language from its
+file suffix. Supported suffixes are <code class="docutils literal notranslate"><span class="pre">.sh</span></code>, <code class="docutils literal notranslate"><span class="pre">.bash</span></code> and <code class="docutils literal notranslate"><span class="pre">.py</span></code>.</p>
 </li>
 <li><p>Included as <strong>inline content</strong> to the directive:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">gmtplot</span><span class="p">::</span>
@@ -157,56 +152,20 @@ the <code class="docutils literal notranslate"><span class="pre">:language:</spa
 </li>
 </ol>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<p>The following RST code:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.. gmtplot::
-    :language: bash
-    :caption: Example showing how to include GMT figures with inline codes
-
-    <span class="nv">ps</span><span class="o">=</span>example_05.ps
-    gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP <span class="m">2</span> MUL PI MUL <span class="m">8</span> DIV COS EXCH NEG <span class="m">10</span> DIV EXP <span class="nv">MUL</span> <span class="o">=</span> sombrero.nc
-    gmt makecpt -C128 -T-5,5 -N &gt; g.cpt
-    gmt grdview sombrero.nc -JX6i -JZ2i -B5 -Bz0.5 -BSEwnZ -N-1+gwhite -Qs -I+a225+nt0.75 -X1.5i <span class="se">\</span>
-        -Cg.cpt -R-15/15/-15/15/-1/1 -K -p120/30 &gt; <span class="nv">$ps</span>
-    <span class="nb">echo</span> <span class="s2">&quot;4.1 5.5 z(r) = cos (2@~p@~r/8) @~\327@~e@+-r/10@+&quot;</span> <span class="p">|</span> gmt pstext -R0/11/0/8.5 -Jx1i <span class="se">\</span>
-            -F+f50p,ZapfChancery-MediumItalic+jBC -O &gt;&gt; <span class="nv">$ps</span>
-    rm -f g.cpt sombrero.nc
-</pre></div>
-</div>
-<p>is executed by sphinx and turned into:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ps</span><span class="o">=</span>example_05.ps
-gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP <span class="m">2</span> MUL PI MUL <span class="m">8</span> DIV COS EXCH NEG <span class="m">10</span> DIV EXP <span class="nv">MUL</span> <span class="o">=</span> sombrero.nc
-gmt makecpt -C128 -T-5,5 -N &gt; g.cpt
-gmt grdview sombrero.nc -JX6i -JZ2i -B5 -Bz0.5 -BSEwnZ -N-1+gwhite -Qs -I+a225+nt0.75 -X1.5i <span class="se">\</span>
-        -Cg.cpt -R-15/15/-15/15/-1/1 -K -p120/30 &gt; <span class="nv">$ps</span>
-<span class="nb">echo</span> <span class="s2">&quot;4.1 5.5 z(r) = cos (2@~p@~r/8) @~\327@~e@+-r/10@+&quot;</span> <span class="p">|</span> gmt pstext -R0/11/0/8.5 -Jx1i <span class="se">\</span>
-        -F+f50p,ZapfChancery-MediumItalic+jBC -O &gt;&gt; <span class="nv">$ps</span>
-rm -f g.cpt sombrero.nc
-</pre></div>
-</div>
-<figure class="align-center" id="id1">
-<img alt="_images/345544d6a7f3a553c55268e0a12efdcb.png" src="_images/345544d6a7f3a553c55268e0a12efdcb.png" />
-<figcaption>
-<p><span class="caption-text">Example showing how to include GMT figures with inline codes</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
-</figcaption>
-</figure>
-</section>
-</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="install.html" class="btn btn-neutral float-left" title="Installing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2018-2022, The GMT Developers.
-      <span class="lastupdated">Last updated on Apr 26, 2022.
+      <span class="lastupdated">Last updated on May 01, 2022.
       </span></p>
   </div>
 

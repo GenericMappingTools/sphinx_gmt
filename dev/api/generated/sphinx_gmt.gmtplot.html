@@ -24,7 +24,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="sphinx_gmt.gmtplot.Directive" href="sphinx_gmt.gmtplot.Directive.html" />
+    <link rel="next" title="sphinx_gmt.gmtplot.GMTPlotDirective" href="sphinx_gmt.gmtplot.GMTPlotDirective.html" />
     <link rel="prev" title="API Reference" href="../index.html" />
     
     <script src="../../_static/require.js"></script>
@@ -62,19 +62,18 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../gmtplot.html">Including GMT plots in Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration-options">Configuration options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.Directive.html">sphinx_gmt.gmtplot.Directive</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.GMTPlotDirective.html">sphinx_gmt.gmtplot.GMTPlotDirective</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.Path.html">sphinx_gmt.gmtplot.Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.environ.html">sphinx_gmt.gmtplot.environ</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html">sphinx_gmt.gmtplot.eval_bash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.eval_python.html">sphinx_gmt.gmtplot.eval_python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.get_suffix_from_language.html">sphinx_gmt.gmtplot.get_suffix_from_language</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.guess_language.html">sphinx_gmt.gmtplot.guess_language</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.md5.html">sphinx_gmt.gmtplot.md5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.render_figure.html">sphinx_gmt.gmtplot.render_figure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sphinx_gmt.gmtplot.setup.html">sphinx_gmt.gmtplot.setup</a></li>
 </ul>
@@ -181,14 +180,8 @@ to the top source directory.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.Directive.html#sphinx_gmt.gmtplot.Directive" title="sphinx_gmt.gmtplot.Directive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Directive</span></code></a>(name, arguments, options, content, ...)</p></td>
-<td><p>Base class for reStructuredText directives.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.GMTPlotDirective.html#sphinx_gmt.gmtplot.GMTPlotDirective" title="sphinx_gmt.gmtplot.GMTPlotDirective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMTPlotDirective</span></code></a>(name, arguments, options, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.GMTPlotDirective.html#sphinx_gmt.gmtplot.GMTPlotDirective" title="sphinx_gmt.gmtplot.GMTPlotDirective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMTPlotDirective</span></code></a>(name, arguments, options, ...)</p></td>
 <td><p>The gmtplot directive implementation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.Path.html#sphinx_gmt.gmtplot.Path" title="sphinx_gmt.gmtplot.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code></a>(*args, **kwargs)</p></td>
-<td><p>PurePath subclass that can make system calls.</p></td>
 </tr>
 </tbody>
 </table>
@@ -199,20 +192,20 @@ to the top source directory.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html#sphinx_gmt.gmtplot.eval_bash" title="sphinx_gmt.gmtplot.eval_bash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_bash</span></code></a>(code, code_dir, output_dir, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.environ.html#sphinx_gmt.gmtplot.environ" title="sphinx_gmt.gmtplot.environ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">environ</span></code></a>(env)</p></td>
+<td><p>Temporarily set environment variables inside the context manager and fully restore previous environment afterwards.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html#sphinx_gmt.gmtplot.eval_bash" title="sphinx_gmt.gmtplot.eval_bash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_bash</span></code></a>(code, code_dir, output_dir, ...)</p></td>
 <td><p>Execute a multi-line block of bash code and copy the generated image files to specified output directory.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_python.html#sphinx_gmt.gmtplot.eval_python" title="sphinx_gmt.gmtplot.eval_python"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_python</span></code></a>(code, code_dir, output_dir, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_python.html#sphinx_gmt.gmtplot.eval_python" title="sphinx_gmt.gmtplot.eval_python"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_python</span></code></a>(code, code_dir, output_dir, ...)</p></td>
 <td><p>Execute a multi-line block of Python code and copy the generated image files to specified output directory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.get_suffix_from_language.html#sphinx_gmt.gmtplot.get_suffix_from_language" title="sphinx_gmt.gmtplot.get_suffix_from_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_suffix_from_language</span></code></a>(language)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.get_suffix_from_language.html#sphinx_gmt.gmtplot.get_suffix_from_language" title="sphinx_gmt.gmtplot.get_suffix_from_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_suffix_from_language</span></code></a>(language)</p></td>
 <td><p>Determine suffix from language.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.guess_language.html#sphinx_gmt.gmtplot.guess_language" title="sphinx_gmt.gmtplot.guess_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">guess_language</span></code></a>(filename)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.guess_language.html#sphinx_gmt.gmtplot.guess_language" title="sphinx_gmt.gmtplot.guess_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">guess_language</span></code></a>(filename)</p></td>
 <td><p>Guess language from suffix of the script.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.md5.html#sphinx_gmt.gmtplot.md5" title="sphinx_gmt.gmtplot.md5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">md5</span></code></a>([data])</p></td>
-<td><p>Wrapper around hashlib.md5</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.render_figure.html#sphinx_gmt.gmtplot.render_figure" title="sphinx_gmt.gmtplot.render_figure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">render_figure</span></code></a>(code, code_dir, language, ...)</p></td>
 <td><p>Run a GMT code and save the images in <em>output_dir</em> with file names derived from <em>output_base</em>.</p></td>
@@ -229,14 +222,14 @@ to the top source directory.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sphinx_gmt.gmtplot.Directive.html" class="btn btn-neutral float-right" title="sphinx_gmt.gmtplot.Directive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sphinx_gmt.gmtplot.GMTPlotDirective.html" class="btn btn-neutral float-right" title="sphinx_gmt.gmtplot.GMTPlotDirective" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2018-2022, The GMT Developers.
-      <span class="lastupdated">Last updated on Apr 26, 2022.
+      <span class="lastupdated">Last updated on May 01, 2022.
       </span></p>
   </div>
 

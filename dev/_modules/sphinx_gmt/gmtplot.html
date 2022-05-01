@@ -59,7 +59,8 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../gmtplot.html">Including GMT plots in Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Previous versions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changes.html">Changelog</a></li>
@@ -150,19 +151,19 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">docutils.parsers.rst</span> <span class="kn">import</span> <span class="n">Directive</span><span class="p">,</span> <span class="n">directives</span>
 <span class="kn">import</span> <span class="nn">jinja2</span>
+<span class="kn">from</span> <span class="nn">docutils.parsers.rst</span> <span class="kn">import</span> <span class="n">Directive</span><span class="p">,</span> <span class="n">directives</span>
 <span class="kn">from</span> <span class="nn">sphinx.util</span> <span class="kn">import</span> <span class="n">md5</span>
-
 
 <span class="n">TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">{</span><span class="si">%- i</span><span class="s2">f show_code -%}</span>
@@ -175,6 +176,7 @@
 <span class="s2">{</span><span class="si">%- e</span><span class="s2">ndif %}</span>
 
 <span class="s2">.. figure:: {{ image }}</span>
+<span class="s2">    :name: {{ label }}</span>
 <span class="s2">    {</span><span class="si">% f</span><span class="s2">or option in image_opts -%}</span>
 <span class="s2">    {{ option }}</span>
 <span class="s2">    {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
@@ -235,6 +237,24 @@
         <span class="k">del</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GMT_DATADIR&quot;</span><span class="p">]</span>
 
 
+<div class="viewcode-block" id="environ"><a class="viewcode-back" href="../../api/generated/sphinx_gmt.gmtplot.environ.html#sphinx_gmt.gmtplot.environ">[docs]</a><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">environ</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Temporarily set environment variables inside the context manager and</span>
+<span class="sd">    fully restore previous environment afterwards.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">original_env</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">env</span><span class="p">}</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">original_env</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
 <span class="k">def</span> <span class="nf">_search_images</span><span class="p">(</span><span class="n">cwd</span><span class="p">):</span>
     <span class="c1"># pylint: disable=no-else-return,no-else-raise</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -277,14 +297,7 @@
 <span class="sd">    Execute a multi-line block of bash code and copy the generated image files</span>
 <span class="sd">    to specified output directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Change &quot;gmt end show&quot; to &quot;gmt end&quot; to avoid displaying figures</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;gmt&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">,</span> <span class="s2">&quot;show&quot;</span><span class="p">]:</span>
-            <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;gmt end&quot;</span>
-    <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">,</span> <span class="n">environ</span><span class="p">({</span><span class="s2">&quot;GMT_END_SHOW&quot;</span><span class="p">:</span> <span class="s2">&quot;off&quot;</span><span class="p">}):</span>
         <span class="n">Path</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;script.sh&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 
         <span class="n">old_gmt_datadir</span> <span class="o">=</span> <span class="n">_set_gmt_datadir</span><span class="p">(</span><span class="n">code_dir</span><span class="p">)</span>
@@ -350,7 +363,11 @@
         <span class="n">old_gmt_datadir</span> <span class="o">=</span> <span class="n">_set_gmt_datadir</span><span class="p">(</span><span class="n">code_dir</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">to_exec</span><span class="p">:</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">Module</span><span class="p">([</span><span class="n">node</span><span class="p">]),</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;exec&quot;</span><span class="p">))</span>
+            <span class="n">exec</span><span class="p">(</span>
+                <span class="nb">compile</span><span class="p">(</span>
+                    <span class="n">ast</span><span class="o">.</span><span class="n">Module</span><span class="p">([</span><span class="n">node</span><span class="p">],</span> <span class="n">type_ignores</span><span class="o">=</span><span class="p">[]),</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;exec&quot;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
         <span class="n">_reset_gmt_datadir</span><span class="p">(</span><span class="n">old_gmt_datadir</span><span class="p">)</span>
 
         <span class="n">images</span> <span class="o">=</span> <span class="n">_search_images</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">)</span>
@@ -539,6 +556,7 @@
         <span class="n">gmtplot_block</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">jinja2</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span><span class="n">TEMPLATE</span><span class="p">)</span>
             <span class="o">.</span><span class="n">render</span><span class="p">(</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;gmtplot-&quot;</span> <span class="o">+</span> <span class="n">output_base</span><span class="p">,</span>
                 <span class="n">show_code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;show-code&quot;</span><span class="p">],</span>
                 <span class="n">code</span><span class="o">=</span><span class="n">builddir_link</span> <span class="o">/</span> <span class="n">code_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                 <span class="n">code_opts</span><span class="o">=</span><span class="n">code_opts</span><span class="p">,</span>
@@ -567,7 +585,7 @@
     <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;gmtplot_show_code&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">app</span><span class="o">.</span><span class="n">add_config_value</span><span class="p">(</span><span class="s2">&quot;gmtplot_figure_align&quot;</span><span class="p">,</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3.0&quot;</span><span class="p">,</span>
         <span class="s2">&quot;parallel_read_safe&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="s2">&quot;parallel_write_safe&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">}</span>
@@ -582,7 +600,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2018-2022, The GMT Developers.
-      <span class="lastupdated">Last updated on Apr 26, 2022.
+      <span class="lastupdated">Last updated on May 01, 2022.
       </span></p>
   </div>
 

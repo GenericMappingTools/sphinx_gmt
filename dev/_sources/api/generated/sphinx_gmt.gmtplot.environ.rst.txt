@@ -1,9 +1,9 @@
-sphinx\_gmt.gmtplot.md5
-=======================
+sphinx\_gmt.gmtplot.environ
+===========================
 
 .. currentmodule:: sphinx_gmt.gmtplot
 
-.. autofunction:: md5
+.. autofunction:: environ
 
 
 .. raw:: html

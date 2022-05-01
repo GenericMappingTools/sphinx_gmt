@@ -18,11 +18,7 @@
 .. autosummary::
   :toctree: ./
 
-  Directive
-
   GMTPlotDirective
-
-  Path
 
 
 
@@ -35,6 +31,8 @@
 .. autosummary::
   :toctree: ./
 
+  environ
+
   eval_bash
 
   eval_python
@@ -42,8 +40,6 @@
   get_suffix_from_language
 
   guess_language
-
-  md5
 
   render_figure
 

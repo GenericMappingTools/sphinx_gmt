@@ -61,7 +61,8 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gmtplot.html">Including GMT plots in Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Previous versions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
@@ -120,19 +121,20 @@
   <section id="sphinx-extensions-for-the-generic-mapping-tools">
 <h1>Sphinx extensions for the Generic Mapping Tools<a class="headerlink" href="#sphinx-extensions-for-the-generic-mapping-tools" title="Permalink to this headline"></a></h1>
 <p>Convert this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">gmtplot</span><span class="p">::</span>
-    <span class="p">:</span><span class="n">language</span><span class="p">:</span> <span class="n">bash</span>
-    <span class="p">:</span><span class="n">show</span><span class="o">-</span><span class="n">code</span><span class="p">:</span> <span class="n">false</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.. gmtplot::
+    :language: bash
+    :show-code: false
+    :caption: GMT plot automatically generated and included by the sphinx extension 🚀
 
-    <span class="n">gmt</span> <span class="n">pscoast</span> <span class="o">-</span><span class="n">Rg</span> <span class="o">-</span><span class="n">JW10i</span> <span class="o">-</span><span class="n">Baf</span> <span class="o">-</span><span class="n">Ggray</span> <span class="o">&gt;</span> <span class="n">globe</span><span class="o">.</span><span class="n">ps</span>
+    gmt pscoast -Rg -JW10i -Baf -Ggray &gt; globe.ps
 </pre></div>
 </div>
 <p>into this:</p>
 <p><a class="reference download internal" download="" href="_downloads/dca39849e8f1fa81bd8098c2f5f443bd/ddcde16e9dd45844fe77f0a9ae4ce283.sh"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">Code</span></code></a></p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="gmtplot-ddcde16e9dd45844fe77f0a9ae4ce283">
 <img alt="_images/ddcde16e9dd45844fe77f0a9ae4ce283.png" src="_images/ddcde16e9dd45844fe77f0a9ae4ce283.png" />
 <figcaption>
-<p><span class="caption-text">GMT plot automatically generated and included by the sphinx extension 🚀</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">GMT plot automatically generated and included by the sphinx extension 🚀</span><a class="headerlink" href="#gmtplot-ddcde16e9dd45844fe77f0a9ae4ce283" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <section id="about">
@@ -212,7 +214,7 @@ of the <strong>BSD 3-clause License</strong>. A copy of this license is provided
 
   <div role="contentinfo">
     <p>&#169; Copyright 2018-2022, The GMT Developers.
-      <span class="lastupdated">Last updated on Apr 26, 2022.
+      <span class="lastupdated">Last updated on May 01, 2022.
       </span></p>
   </div>
 
