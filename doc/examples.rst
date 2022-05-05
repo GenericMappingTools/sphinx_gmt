@@ -43,21 +43,21 @@ is executed by sphinx and turned into:
 Modern GMT bash script
 ----------------------
 
-We have a modern GMT bash script ``example-gmt.sh`` in the current directory.
+We have a modern-mode GMT bash script ``modern-gmt.sh`` in the ``examples/`` directory.
 Its content is:
 
-.. literalinclude:: example-gmt.sh
+.. literalinclude:: examples/modern-gmt.sh
 
 The following RST code:
 
 .. code-block:: bash
 
-    .. gmtplot:: example-gmt.sh
+    .. gmtplot:: examples/modern-gmt.sh
         :width: 30%
         :caption: GMT Orthographic projection
 
 is executed by sphinx and turned into:
 
-.. gmtplot:: example-gmt.sh
+.. gmtplot:: examples/modern-gmt.sh
     :width: 50%
     :caption: GMT Orthographic projection
