@@ -6,33 +6,35 @@ Options
 
 The ``gmtplot`` directive supports the following options:
 
-    show-code : bool
-        Whether to display the source code. The default can be changed using the
-        ``gmtplot_show_code`` variable in ``conf.py``.
+show-code
+    Whether to display the source code. The default can be changed by the
+    ``gmtplot_show_code`` variable in ``conf.py``.
 
-    language : {'python', 'bash'}
-        Specify the language of the source code. The default can be changed using the
-        `highlight_language` variable in conf.py.
+language
+    Specify the language of the source code: either "bash" or "python".
 
-    caption : str
-        Caption of the rendered figure.
+caption
+    Caption of the rendered figure.
 
-Additionally, this directive supports options of the ``figure`` and ``literalinclude``
-directives.
+Additionally, this directive also supports options of the standard ``figure``
+and ``literalinclude`` directives.
 
 Configuration options
 ---------------------
 
 The following options can be set in ``conf.py`` and will apply globally:
 
-    gmtplot_show_code : bool
-        Default value for the ``show-code`` option.
+gmtplot_show_code
+    Default value for the ``show-code`` option.
 
-    gmtplot_basedir : str
-        Base directory, to which ``gmtplot`` file names are relative to. If None or
-        empty, file names are relative to the directory where the file containing the
-        directive is. However, if it is absolute (starting with ``/``), it is relative
-        to the top source directory.
+gmtplot_basedir
+    Base directory, to which ``gmtplot`` file names are relative to. If None or
+    empty, file names are relative to the directory where the file containing the
+    directive is. However, if it is absolute (starting with ``/``), it is relative
+    to the top source directory.
+
+gmtplot_figure_align
+    The figure alignment. Default is "center".
 
 """
 
