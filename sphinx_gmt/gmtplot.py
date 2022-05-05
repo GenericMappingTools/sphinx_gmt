@@ -72,25 +72,29 @@ TEMPLATE = """
 
 
 def _option_language(arg):
-    """Check language option."""
+    """
+    Check language option.
+    """
     return directives.choice(arg, ("bash", "python"))
 
 
 def _option_boolean(arg):
-    # pylint: disable=no-else-return
-    """Check boolean options."""
+    """
+    Check boolean options.
+    """
     if not arg or not arg.strip():  # no argument given, assume used as a flag
         return True
-    elif arg.strip().lower() in ("no", "0", "false"):
+    if arg.strip().lower() in ("no", "0", "false"):
         return False
-    elif arg.strip().lower() in ("yes", "1", "true"):
+    if arg.strip().lower() in ("yes", "1", "true"):
         return True
-    else:
-        raise ValueError('f"{arg}" unknown boolean')
+    raise ValueError('f"{arg}" unknown boolean')
 
 
 def _option_align(arg):
-    """Check align option."""
+    """
+    Check align option.
+    """
     return directives.choice(
         arg, ("top", "middle", "bottom", "left", "center", "right")
     )
@@ -290,24 +294,26 @@ def render_figure(code, code_dir, language, output_dir, output_base):
 
 
 def guess_language(filename):
-    # pylint: disable=no-else-return
-    """Guess language from suffix of the script."""
+    """
+    Guess language from suffix of the script.
+    """
     suffix = Path(filename).suffix
     if suffix in [".sh", ".bash"]:
         return "bash"
-    elif suffix == ".py":
+    if suffix == ".py":
         return "python"
-    else:
-        raise ValueError(f"Cannot guess language from {filename}")
+    raise ValueError(f"Cannot guess language for file {filename}.")
 
 
 def get_suffix_from_language(language):
-    """Determine suffix from language."""
+    """
+    Determine suffix from language.
+    """
     if language == "bash":
-        suffix = "sh"
-    elif language == "python":
-        suffix = "py"
-    return suffix
+        return "sh"
+    if language == "python":
+        return "py"
+    raise ValueError(f"Unrecognized language {language}.")
 
 
 class GMTPlotDirective(Directive):
