@@ -176,10 +176,9 @@ def eval_bash(code, code_dir, output_dir, output_base):
     with environ(
         {"GMT_END_SHOW": "off", "GMT_DATADIR": _updated_gmt_datadir(code_dir)}
     ), tempfile.TemporaryDirectory() as tmpdir:
-        Path(tmpdir, "script.sh").write_text(code, encoding="utf-8")
+        Path(tmpdir, "gmtplot-script.sh").write_text(code, encoding="utf-8")
         proc = subprocess.run(
-            f'bash {Path(tmpdir, "script.sh")}',
-            shell=True,
+            ["bash", "-e", Path(tmpdir, "gmtplot-script.sh")],
             check=False,
             cwd=tmpdir,
             stdout=subprocess.PIPE,
@@ -187,13 +186,13 @@ def eval_bash(code, code_dir, output_dir, output_base):
         )
         if proc.returncode != 0:
             raise RuntimeError(
-                "GMT bash failed:\n"
-                'STDOUT: {proc.stdout.decode("utf-8")}\n'
-                'STDERR: {proc.stderr.decode("utf-8")}'
+                "\nGMT bash failed:\n"
+                f"STDOUT: {proc.stdout.decode('utf-8')}"
+                f"STDERR: {proc.stderr.decode('utf-8')}"
             )
         for image in _search_images(tmpdir):
             shutil.move(image, Path(output_dir, output_base).with_suffix(image.suffix))
-        return output_base + ".*"
+        return f"{output_base}.*"
 
 
 class _CatchDisplay:
