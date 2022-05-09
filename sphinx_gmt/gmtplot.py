@@ -187,6 +187,7 @@ def eval_bash(code, code_dir, output_dir, output_base):
         if proc.returncode != 0:
             raise RuntimeError(
                 "\nGMT bash failed:\n"
+                f"{code}"
                 f"STDOUT: {proc.stdout.decode('utf-8')}"
                 f"STDERR: {proc.stderr.decode('utf-8')}"
             )
