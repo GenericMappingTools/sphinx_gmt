@@ -7,7 +7,7 @@ Options
 The ``gmtplot`` directive supports the following options:
 
 show-code
-    Whether to display the source code. The default can be changed by the
+    Whether to show the source code. The default can be changed by the
     ``gmtplot_show_code`` variable in ``conf.py``.
 
 language
@@ -25,20 +25,20 @@ Configuration options
 The following options can be set in ``conf.py`` and will apply globally:
 
 gmtplot_show_code
-    Default value for the ``show-code`` option.
+    Default value for the ``show-code`` option. Default is ``True``.
 
 gmtplot_basedir
     Base directory, to which ``gmtplot`` file names are relative to. If None or
     empty, file names are relative to the directory where the file containing the
     directive is. However, if it is absolute (starting with ``/``), it is relative
-    to the top source directory.
+    to the top source directory. Default is ``None``.
 
 gmtplot_figure_align
-    The figure alignment. Default is "center".
+    The figure alignment. Default is ``"center"``.
 
 gmtplot_gmt_config
     A dict of GMT settings that are applied to all GMT scripts.
-    The default is ``{"GMT_GRAPHICS_FORMAT": "ps"}``.
+    Default is ``{"GMT_GRAPHICS_FORMAT": "ps"}``.
 
 """
 
@@ -332,7 +332,7 @@ class GMTPlotDirective(Directive):
     optional_arguments = 1
     final_argument_whitespace = False
 
-    # options list of literalinclude directive
+    # options for the literalinclude directive
     options_code = {
         "dedent": int,
         "linenos": directives.flag,
@@ -351,7 +351,7 @@ class GMTPlotDirective(Directive):
         "emphasize-lines": directives.unchanged_required,
         "name": directives.unchanged,
     }
-    # options list of figure directive
+    # options for the figure directive
     options_figure = {
         "alt": directives.unchanged,
         "height": directives.length_or_unitless,
@@ -360,6 +360,7 @@ class GMTPlotDirective(Directive):
         "align": _option_align,
         "class": directives.class_option,
     }
+    # options for the gmtplot directive
     option_spec = {
         "show-code": _option_boolean,
         "caption": directives.unchanged,
@@ -379,11 +380,8 @@ class GMTPlotDirective(Directive):
 
         # Get the name of the rst source file we are currently processing
         rst_file = Path(document["source"])
-
         # current working directory of the rst source file
         cwd = rst_file.parent
-
-        caption = ""
 
         if self.arguments:  # load codes from a file
             # Guess language from suffix of the script
@@ -399,18 +397,16 @@ class GMTPlotDirective(Directive):
                 code_file = Path(env.app.srcdir, self.arguments[0][1:])
             else:  # relative to current rst file's path
                 code_file = Path(cwd, self.arguments[0])
-            code_file = code_file.absolute()
-            code_basedir = code_file.parent
+            code_basedir = code_file.absolute().parent
             code = code_file.read_text(encoding="utf-8")
-
             # If there is content, it will be passed as a caption.
             caption = "\n".join(self.content)
         else:  # inline codes
-            self.options.setdefault("language", config.highlight_language)
+            if "language" not in self.options:
+                self.options["language"] = config.highlight_language
             code_basedir = cwd
             code = textwrap.dedent("\n".join(map(str, self.content)))
-            if "caption" in self.options:
-                caption = self.options["caption"]
+            caption = self.options["caption"] if "caption" in self.options else ""
 
         # use the md5sum value of the code as the basename of script and image files
         output_base = md5(code.encode()).hexdigest()
@@ -419,6 +415,7 @@ class GMTPlotDirective(Directive):
         suffix = get_suffix_from_language(self.options["language"])
         code_file = Path(cwd, f"{output_base}.{suffix}")
 
+        code_opts = ""
         if self.options["show-code"]:
             code_opts = []
             for key, val in self.options.items():
@@ -426,8 +423,6 @@ class GMTPlotDirective(Directive):
                     code_opts.append(f":{key}:")
                 elif key in self.options_code:
                     code_opts.append(f":{key}: {val}")
-        else:
-            code_opts = ""
 
         image_opts = [
             f":{key}: {val}"
