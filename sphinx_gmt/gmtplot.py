@@ -36,6 +36,10 @@ gmtplot_basedir
 gmtplot_figure_align
     The figure alignment. Default is "center".
 
+gmtplot_gmt_config
+    A dict of GMT settings that are applied to all GMT scripts.
+    The default is ``{"GMT_GRAPHICS_FORMAT": "ps"}``.
+
 """
 
 import ast
@@ -131,6 +135,17 @@ def environ(env):
                 os.environ[key] = value
 
 
+def _write_gmt_config(gmt_config, cwd):
+    """
+    Write GMT settings to a gmt.conf file in the current directory.
+    """
+    if not gmt_config:
+        return
+    with open(Path(cwd, "gmt.conf"), "w", encoding="utf-8") as fconf:
+        for key, value in gmt_config.items():
+            fconf.write(f"{key} = {value}")
+
+
 def _search_images(cwd):
     # pylint: disable=no-else-return,no-else-raise
     """
@@ -168,7 +183,7 @@ def _search_images(cwd):
             return []
 
 
-def eval_bash(code, code_dir, output_dir, output_base):
+def eval_bash(code, code_dir, output_dir, output_base, config=None):
     """
     Execute a multi-line block of bash code and copy the generated image files
     to specified output directory.
@@ -177,6 +192,8 @@ def eval_bash(code, code_dir, output_dir, output_base):
         {"GMT_END_SHOW": "off", "GMT_DATADIR": _updated_gmt_datadir(code_dir)}
     ), tempfile.TemporaryDirectory() as tmpdir:
         Path(tmpdir, "gmtplot-script.sh").write_text(code, encoding="utf-8")
+        if config.gmtplot_gmt_config:
+            _write_gmt_config(config.gmtplot_gmt_config, cwd=tmpdir)
         proc = subprocess.run(
             ["bash", "-e", Path(tmpdir, "gmtplot-script.sh")],
             check=False,
@@ -218,8 +235,10 @@ class _CatchDisplay:
         self.output = output
 
 
-def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
-    # pylint: disable=exec-used
+def eval_python(
+    code, code_dir, output_dir, output_base, filename="<string>", config=None
+):
+    # pylint: disable=exec-used,too-many-arguments
     """
     Execute a multi-line block of Python code and copy the generated image files
     to specified output directory.
@@ -237,6 +256,8 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
         {"GMT_END_SHOW": "off", "GMT_DATADIR": _updated_gmt_datadir(code_dir)}
     ), tempfile.TemporaryDirectory() as tmpdir:
         os.chdir(tmpdir)
+        if config.gmtplot_gmt_config:
+            _write_gmt_config(config.gmtplot_gmt_config, cwd=".")
         for node in to_exec:
             exec(
                 compile(
@@ -262,18 +283,19 @@ def eval_python(code, code_dir, output_dir, output_base, filename="<string>"):
                 catch_display.output.data
             )
     os.chdir(cwd)
-    return output_base + ".*"
+    return f"{output_base}.*"
 
 
-def render_figure(code, code_dir, language, output_dir, output_base):
+def render_figure(code, code_dir, language, output_dir, output_base, config=None):
     """
     Run a GMT code and save the images in *output_dir* with file names
     derived from *output_base*.
     """
+    # pylint: disable=too-many-arguments
     if language == "bash":
-        figname = eval_bash(code, code_dir, output_dir, output_base)
+        figname = eval_bash(code, code_dir, output_dir, output_base, config=config)
     elif language == "python":
-        figname = eval_python(code, code_dir, output_dir, output_base)
+        figname = eval_python(code, code_dir, output_dir, output_base, config=config)
     return figname
 
 
@@ -425,7 +447,7 @@ class GMTPlotDirective(Directive):
 
         # make figures
         image = render_figure(
-            code, code_basedir, self.options["language"], builddir, output_base
+            code, code_basedir, self.options["language"], builddir, output_base, config
         )
 
         gmtplot_block = (
@@ -459,6 +481,7 @@ def setup(app):
     app.add_config_value("gmtplot_basedir", None, True)
     app.add_config_value("gmtplot_show_code", True, True)
     app.add_config_value("gmtplot_figure_align", "center", True)
+    app.add_config_value("gmtplot_gmt_config", {"GMT_GRAPHICS_FORMAT": "ps"}, True)
     metadata = {
         "version": "0.3.0",
         "parallel_read_safe": True,
