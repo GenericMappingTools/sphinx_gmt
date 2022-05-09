@@ -113,7 +113,7 @@ def _updated_gmt_datadir(code_dir):
     """
     if os.environ.get("GMT_DATADIR") is not None:
         sep = ";" if sys.platform == "win32" else ":"
-        return f"{sep}".join(str(code_dir), os.environ["GMT_DATADIR"])
+        return f"{sep}".join([str(code_dir), os.environ["GMT_DATADIR"]])
     return str(code_dir)
 
 
