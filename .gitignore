@@ -13,6 +13,7 @@ doc/modules
 doc/api/gmt*.rst
 doc/api/generated
 .ipynb_checkpoints
+.eggs/
 *.egg-info
 .env
 MANIFEST

@@ -3,6 +3,14 @@
 Changelog
 =========
 
+v0.3.0 (2022/05/01)
+-------------------
+
+* Add examples for including GMT classic and modern scripts
+* Fix the missing "type_ignores" exception for Python scripts
+* Setting ``GMT_END_SHOW`` to ``off`` to disable image display in external viewers
+* Add labels to images so that they can be referenced
+
 v0.2.0 (2022/04/26)
 -------------------
 

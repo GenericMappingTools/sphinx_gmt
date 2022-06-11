@@ -27,7 +27,7 @@ About
 -----
 
 This package provides a `Sphinx <http://www.sphinx-doc.org/>`__ extension for
-including `GMT <http://gmt.soest.hawaii.edu/>`__ code and figures in your
+including `GMT <https://www.generic-mapping-tools.org/>`__ code and figures in your
 documentation. The extension defines the ``gmtplot`` directive that
 will execute the given code and insert the generated figure into the document
 (like the `matplotlib <https://matplotlib.org/>`__ ``plot`` directive).
@@ -36,7 +36,7 @@ will execute the given code and insert the generated figure into the document
 Features
 --------
 
-- Supports any version of GMT
+- Supports any GMT versions
 - Works with both Bash and Python (`PyGMT <https://www.pygmt.org/>`__)
 - Include code inline or load from a script
 - Options to show/hide the code, insert captions, link to hidden code, etc.

@@ -43,21 +43,45 @@ is executed by sphinx and turned into:
 Modern GMT bash script
 ----------------------
 
-We have a modern GMT bash script ``example-gmt.sh`` in the current directory.
+We have a modern-mode GMT bash script ``modern-gmt.sh`` in the ``examples/`` directory.
 Its content is:
 
-.. literalinclude:: example-gmt.sh
+.. literalinclude:: examples/modern-gmt.sh
 
-The following RST code:
+The following ReST code:
 
 .. code-block:: bash
 
-    .. gmtplot:: example-gmt.sh
+    .. gmtplot:: examples/modern-gmt.sh
         :width: 30%
         :caption: GMT Orthographic projection
 
 is executed by sphinx and turned into:
 
-.. gmtplot:: example-gmt.sh
+.. gmtplot:: examples/modern-gmt.sh
     :width: 50%
     :caption: GMT Orthographic projection
+
+Data files
+----------
+
+If your GMT script needs data files, you can put data files under the same
+directory as the GMT script (or the ReST file for inline codes). Or you can put
+data files in directories defined by environmental variable **GMT_DATADIR**.
+
+In this example, the script is ``examples/needs-data-files.sh``, and the data
+file is ``examples/points.txt``.
+
+The following ReST code:
+
+.. code-block:: bash
+
+    .. gmtplot:: examples/needs-data-files.sh
+        :width: 50%
+        :caption: GMT script needs a data file.
+
+is executed by sphinx and turned into:
+
+.. gmtplot:: examples/needs-data-files.sh
+    :width: 50%
+    :caption: GMT script needs a data file.
