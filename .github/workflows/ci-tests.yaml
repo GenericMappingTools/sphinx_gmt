@@ -56,7 +56,7 @@ jobs:
 
       # Install Mambaforge with conda-forge dependencies
       - name: Setup Mambaforge
-        uses: conda-incubator/setup-miniconda@v2.2.0
+        uses: conda-incubator/setup-miniconda@v3.0.1
         with:
           activate-environment: sphinx_gmt
           python-version: ${{ matrix.python-version }}
