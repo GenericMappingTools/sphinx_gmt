@@ -202,12 +202,13 @@ def eval_bash(code, code_dir, output_dir, output_base, config=None):
             stderr=subprocess.PIPE,
         )
         if proc.returncode != 0:
-            raise RuntimeError(
+            msg = (
                 "\nGMT bash failed:\n"
-                f"{code}"
+                f"{code}\n"
                 f"STDOUT: {proc.stdout.decode('utf-8')}"
                 f"STDERR: {proc.stderr.decode('utf-8')}"
             )
+            raise RuntimeError(msg)
         for image in _search_images(tmpdir):
             shutil.move(image, Path(output_dir, output_base).with_suffix(image.suffix))
         return f"{output_base}.*"
