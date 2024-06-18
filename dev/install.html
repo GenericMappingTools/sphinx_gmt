@@ -1,26 +1,29 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
         <title>Installing &mdash; Sphinx Extensions for GMT</title>
     
 
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/style.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/style.css?v=9d52e394" />
+
+  
     <link rel="shortcut icon" href="_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -50,7 +53,7 @@
     
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -109,8 +112,8 @@
           
 <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Installing</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installing</li>
     <li class="source-link">
         
             
@@ -128,13 +131,13 @@
            <div itemprop="articleBody">
              
   <section id="installing">
-<span id="install"></span><h1>Installing<a class="headerlink" href="#installing" title="Permalink to this headline"></a></h1>
+<span id="install"></span><h1>Installing<a class="headerlink" href="#installing" title="Link to this heading"></a></h1>
 <section id="which-python">
-<h2>Which Python?<a class="headerlink" href="#which-python" title="Permalink to this headline"></a></h2>
+<h2>Which Python?<a class="headerlink" href="#which-python" title="Link to this heading"></a></h2>
 <p>You’ll need <strong>Python 3.8 or greater</strong> to use this extension.</p>
 </section>
 <section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline"></a></h2>
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.generic-mapping-tools.org/">GMT</a></p></li>
 <li><p><a class="reference external" href="http://www.sphinx-doc.org">sphinx</a></p></li>
@@ -142,7 +145,7 @@
 </ul>
 </section>
 <section id="installing-with-conda">
-<h2>Installing with conda<a class="headerlink" href="#installing-with-conda" title="Permalink to this headline"></a></h2>
+<h2>Installing with conda<a class="headerlink" href="#installing-with-conda" title="Link to this heading"></a></h2>
 <p>You can install <code class="docutils literal notranslate"><span class="pre">sphinx_gmt</span></code> using the <a class="reference external" href="https://conda.io/">conda package manager</a>
 that comes with the Anaconda distribution:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">sphinx_gmt</span> <span class="o">--</span><span class="n">channel</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
@@ -150,14 +153,14 @@ that comes with the Anaconda distribution:</p>
 </div>
 </section>
 <section id="installing-with-pip">
-<h2>Installing with pip<a class="headerlink" href="#installing-with-pip" title="Permalink to this headline"></a></h2>
+<h2>Installing with pip<a class="headerlink" href="#installing-with-pip" title="Link to this heading"></a></h2>
 <p>Alternatively, you can also use the <a class="reference external" href="https://pypi.org/project/pip/">pip package manager</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx_gmt</span>
 </pre></div>
 </div>
 </section>
 <section id="installing-the-latest-development-version">
-<h2>Installing the latest development version<a class="headerlink" href="#installing-the-latest-development-version" title="Permalink to this headline"></a></h2>
+<h2>Installing the latest development version<a class="headerlink" href="#installing-the-latest-development-version" title="Link to this heading"></a></h2>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install the latest source from GitHub:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">GenericMappingTools</span><span class="o">/</span><span class="n">sphinx_gmt</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">zip</span>
 </pre></div>
@@ -170,7 +173,7 @@ that comes with the Anaconda distribution:</p>
 </div>
 </section>
 <section id="enabling-the-extensions">
-<h2>Enabling the extensions<a class="headerlink" href="#enabling-the-extensions" title="Permalink to this headline"></a></h2>
+<h2>Enabling the extensions<a class="headerlink" href="#enabling-the-extensions" title="Link to this heading"></a></h2>
 <p>After installing the Python package, you’ll have to enable each extension in your
 <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
@@ -193,8 +196,8 @@ that comes with the Anaconda distribution:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2018-2022, The GMT Developers.
-      <span class="lastupdated">Last updated on May 01, 2022.
+    <p>&#169; Copyright 2018-2024, The GMT Developers.
+      <span class="lastupdated">Last updated on Jun 18, 2024.
       </span></p>
   </div>
 

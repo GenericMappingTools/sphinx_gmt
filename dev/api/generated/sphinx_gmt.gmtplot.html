@@ -1,26 +1,29 @@
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
         <title>sphinx_gmt.gmtplot &mdash; Sphinx Extensions for GMT</title>
     
 
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=9d52e394" />
+
+  
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -50,7 +53,7 @@
     
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -116,9 +119,9 @@
           
 <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">API Reference</a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code></li>
     <li class="source-link">
         
             
@@ -138,47 +141,43 @@
            <div itemprop="articleBody">
              
   <div class="api-module"><section id="sphinx-gmt-gmtplot">
-<h1><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code><a class="headerlink" href="#sphinx-gmt-gmtplot" title="Permalink to this headline"></a></h1>
-<hr><span class="target" id="module-sphinx_gmt.gmtplot"></span><p>A directive for including a GMT plot in a Sphinx document.</p>
+<h1><code class="docutils literal notranslate"><span class="pre">sphinx_gmt.gmtplot</span></code><a class="headerlink" href="#sphinx-gmt-gmtplot" title="Link to this heading"></a></h1>
+<hr><p id="module-sphinx_gmt.gmtplot">A directive for including a GMT plot in a Sphinx document.</p>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline"></a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">gmtplot</span></code> directive supports the following options:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>show-code<span class="classifier">bool</span></dt><dd><p>Whether to display the source code. The default can be changed using the
+<dl class="simple">
+<dt>show-code</dt><dd><p>Whether to show the source code. The default can be changed by the
 <code class="docutils literal notranslate"><span class="pre">gmtplot_show_code</span></code> variable in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>.</p>
 </dd>
-<dt>language<span class="classifier">{‘python’, ‘bash’}</span></dt><dd><p>Specify the language of the source code. The default can be changed using the
-<cite>highlight_language</cite> variable in conf.py.</p>
+<dt>language</dt><dd><p>Specify the language of the source code: either “bash” or “python”.</p>
 </dd>
-<dt>caption<span class="classifier">str</span></dt><dd><p>Caption of the rendered figure.</p>
+<dt>caption</dt><dd><p>Caption of the rendered figure.</p>
 </dd>
 </dl>
-</div></blockquote>
-<p>Additionally, this directive supports options of the <code class="docutils literal notranslate"><span class="pre">figure</span></code> and <code class="docutils literal notranslate"><span class="pre">literalinclude</span></code>
-directives.</p>
+<p>Additionally, this directive also supports options of the standard <code class="docutils literal notranslate"><span class="pre">figure</span></code>
+and <code class="docutils literal notranslate"><span class="pre">literalinclude</span></code> directives.</p>
 </section>
 <section id="configuration-options">
-<h2>Configuration options<a class="headerlink" href="#configuration-options" title="Permalink to this headline"></a></h2>
+<h2>Configuration options<a class="headerlink" href="#configuration-options" title="Link to this heading"></a></h2>
 <p>The following options can be set in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> and will apply globally:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>gmtplot_show_code<span class="classifier">bool</span></dt><dd><p>Default value for the <code class="docutils literal notranslate"><span class="pre">show-code</span></code> option.</p>
+<dl class="simple">
+<dt>gmtplot_show_code</dt><dd><p>Default value for the <code class="docutils literal notranslate"><span class="pre">show-code</span></code> option. Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
-<dt>gmtplot_basedir<span class="classifier">str</span></dt><dd><p>Base directory, to which <code class="docutils literal notranslate"><span class="pre">gmtplot</span></code> file names are relative to. If None or
+<dt>gmtplot_basedir</dt><dd><p>Base directory, to which <code class="docutils literal notranslate"><span class="pre">gmtplot</span></code> file names are relative to. If None or
 empty, file names are relative to the directory where the file containing the
 directive is. However, if it is absolute (starting with <code class="docutils literal notranslate"><span class="pre">/</span></code>), it is relative
-to the top source directory.</p>
+to the top source directory. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt>gmtplot_figure_align</dt><dd><p>The figure alignment. Default is <code class="docutils literal notranslate"><span class="pre">&quot;center&quot;</span></code>.</p>
+</dd>
+<dt>gmtplot_gmt_config</dt><dd><p>A dict of GMT settings that are applied to all GMT scripts.
+Default is <code class="docutils literal notranslate"><span class="pre">{&quot;GMT_GRAPHICS_FORMAT&quot;:</span> <span class="pre">&quot;ps&quot;}</span></code>.</p>
 </dd>
 </dl>
-</div></blockquote>
 </section>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.GMTPlotDirective.html#sphinx_gmt.gmtplot.GMTPlotDirective" title="sphinx_gmt.gmtplot.GMTPlotDirective"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMTPlotDirective</span></code></a>(name, arguments, options, ...)</p></td>
 <td><p>The gmtplot directive implementation.</p></td>
@@ -187,15 +186,11 @@ to the top source directory.</p>
 </table>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.environ.html#sphinx_gmt.gmtplot.environ" title="sphinx_gmt.gmtplot.environ"><code class="xref py py-obj docutils literal notranslate"><span class="pre">environ</span></code></a>(env)</p></td>
 <td><p>Temporarily set environment variables inside the context manager and fully restore previous environment afterwards.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html#sphinx_gmt.gmtplot.eval_bash" title="sphinx_gmt.gmtplot.eval_bash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_bash</span></code></a>(code, code_dir, output_dir, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_bash.html#sphinx_gmt.gmtplot.eval_bash" title="sphinx_gmt.gmtplot.eval_bash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_bash</span></code></a>(code, code_dir, output_dir, ...[, ...])</p></td>
 <td><p>Execute a multi-line block of bash code and copy the generated image files to specified output directory.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="sphinx_gmt.gmtplot.eval_python.html#sphinx_gmt.gmtplot.eval_python" title="sphinx_gmt.gmtplot.eval_python"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_python</span></code></a>(code, code_dir, output_dir, ...)</p></td>
@@ -228,8 +223,8 @@ to the top source directory.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2018-2022, The GMT Developers.
-      <span class="lastupdated">Last updated on May 01, 2022.
+    <p>&#169; Copyright 2018-2024, The GMT Developers.
+      <span class="lastupdated">Last updated on Jun 18, 2024.
       </span></p>
   </div>
 
